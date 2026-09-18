@@ -315,4 +315,18 @@ formatPaceDifference(
         .toString()
         .padStart(2, '0')}`;
 }
+
+resetAllData(): void {
+    const confirmed = window.confirm(
+        'Are you sure you want to reset all Fitko data?\n\n' +
+        'Workouts, runs, nutrition and weight history will be deleted.'
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    localStorage.clear();
+    window.location.reload();
+}
 }
