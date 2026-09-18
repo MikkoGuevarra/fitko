@@ -1,13 +1,30 @@
+:host {
+    display: block;
+}
+
+
+/* ========================================
+   PAGE
+======================================== */
+
 .workout-page {
     width: 100%;
     max-width: 600px;
-
     margin: 0 auto;
-    padding: 24px 18px 32px;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        20px;
 }
 
+
+/* ========================================
+   HEADER
+======================================== */
+
 .header {
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 
     p {
         margin: 0 0 4px;
@@ -22,65 +39,85 @@
     h1 {
         margin: 0;
 
-        font-size: 28px;
+        color: #0f172a;
+
+        font-size: 26px;
+        font-weight: 800;
+        line-height: 1.1;
     }
 
     span {
         display: block;
 
-        margin-top: 5px;
+        margin-top: 4px;
 
         color: #64748b;
 
-        font-size: 13px;
+        font-size: 12px;
     }
 }
+
+
+/* ========================================
+   WORKOUT LIST
+======================================== */
 
 .workout-list {
     display: flex;
     flex-direction: column;
-
     gap: 12px;
 }
+
+
+/* ========================================
+   WORKOUT CARD
+======================================== */
 
 .workout-card {
     display: flex;
     align-items: center;
-text-decoration: none;
-    width: 100%;
 
-    padding: 18px;
+    width: 100%;
+    padding: 16px;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
-    background: white;
+    background: #fff;
     color: #0f172a;
 
     text-align: left;
+    text-decoration: none;
 
     cursor: pointer;
 
     transition:
         transform 150ms ease,
-        border-color 150ms ease;
+        border-color 150ms ease,
+        background 150ms ease;
 
     &:active {
         transform: scale(0.98);
     }
 }
 
+
+/* ========================================
+   DAY
+======================================== */
+
 .day {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
 
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
 
-    margin-right: 14px;
+    margin-right: 13px;
 
-    border-radius: 15px;
+    border-radius: 14px;
 
     background: #ecf5f6;
     color: #0f5e6e;
@@ -90,32 +127,189 @@ text-decoration: none;
     letter-spacing: 0.5px;
 }
 
+
+/* ========================================
+   WORKOUT INFO
+======================================== */
+
 .info {
     display: flex;
     flex: 1;
     flex-direction: column;
 
+    min-width: 0;
+
     strong {
-        font-size: 17px;
+        color: #0f172a;
+
+        font-size: 16px;
+        font-weight: 800;
     }
 
     span {
-        margin-top: 4px;
+        margin-top: 3px;
 
         color: #64748b;
 
-        font-size: 11px;
+        font-size: 10px;
     }
 }
 
 .arrow {
+    margin-left: 8px;
+
     color: #0f5e6e;
 
-    font-size: 24px;
+    font-size: 22px;
 }
 
+
+/* ========================================
+   ACTIVE WORKOUT
+======================================== */
+
+.active-workout {
+    margin-bottom: 18px;
+    padding: 14px;
+
+    border: 1px solid #99f6e4;
+    border-radius: 16px;
+
+    background: #f0fdfa;
+}
+
+.active-workout-top {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.active-workout-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 11px;
+
+    background: #0f5e6e;
+    color: #fff;
+
+    font-size: 13px;
+}
+
+.active-workout-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    min-width: 0;
+
+    span {
+        color: #0f5e6e;
+
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+    }
+
+    strong {
+        margin-top: 2px;
+
+        color: #0f172a;
+
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    small {
+        margin-top: 3px;
+
+        color: #64748b;
+
+        font-size: 9px;
+    }
+}
+
+.active-workout-progress {
+    height: 5px;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #ccfbf1;
+}
+
+.active-workout-progress-value {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #0f5e6e;
+
+    transition: width 200ms ease;
+}
+
+.active-workout-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+
+    margin-top: 12px;
+
+    button {
+        min-height: 40px;
+
+        border-radius: 11px;
+
+        font-size: 10px;
+        font-weight: 800;
+
+        cursor: pointer;
+    }
+}
+
+.resume-button {
+    border: 0;
+
+    background: #0f5e6e;
+    color: #fff;
+}
+
+.discard-button {
+    padding: 0 16px;
+
+    border: 1px solid #cbd5e1;
+
+    background: #fff;
+    color: #475569;
+}
+
+
+/* ========================================
+   DISABLED WORKOUT
+======================================== */
+
+.workout-card.disabled {
+    opacity: 0.45;
+
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+/* ========================================
+   HISTORY
+======================================== */
+
 .history {
-    margin-top: 30px;
+    margin-top: 22px;
 }
 
 .history-header {
@@ -123,12 +317,15 @@ text-decoration: none;
     align-items: center;
     justify-content: space-between;
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     h2 {
         margin: 0;
 
-        font-size: 17px;
+        color: #0f172a;
+
+        font-size: 16px;
+        font-weight: 800;
     }
 
     span {
@@ -142,34 +339,47 @@ text-decoration: none;
     overflow: hidden;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
-    background: white;
+    background: #fff;
 }
+
+
+/* ========================================
+   HISTORY CARD
+======================================== */
 
 .history-card {
     display: flex;
     align-items: center;
 
-    padding: 14px;
+    padding: 13px;
 
     border-bottom: 1px solid #f1f5f9;
-color: inherit;
-text-decoration: none;
 
-cursor: pointer;
+    color: inherit;
+    text-decoration: none;
 
-transition:
-    background 150ms ease,
-    transform 150ms ease;
+    cursor: pointer;
 
-&:active {
-    transform: scale(0.99);
-}
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
+
+    &:active {
+        transform: scale(0.99);
+        background: #f8fafc;
+    }
+
     &:last-child {
         border-bottom: 0;
     }
 }
+
+
+/* ========================================
+   HISTORY DATE
+======================================== */
 
 .history-date {
     display: flex;
@@ -178,19 +388,20 @@ transition:
     align-items: center;
     justify-content: center;
 
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
 
-    margin-right: 13px;
+    margin-right: 12px;
 
-    border-radius: 12px;
+    border-radius: 11px;
 
     background: #ecf5f6;
 
     strong {
         color: #0f5e6e;
 
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: 800;
         line-height: 1;
     }
 
@@ -201,9 +412,15 @@ transition:
 
         font-size: 8px;
         font-weight: 700;
+
         text-transform: uppercase;
     }
 }
+
+
+/* ========================================
+   HISTORY INFO
+======================================== */
 
 .history-info {
     display: flex;
@@ -213,7 +430,10 @@ transition:
     min-width: 0;
 
     strong {
+        color: #0f172a;
+
         font-size: 14px;
+        font-weight: 800;
     }
 
     span {
@@ -242,12 +462,17 @@ transition:
     font-size: 20px;
 }
 
+
+/* ========================================
+   EMPTY HISTORY
+======================================== */
+
 .empty-history {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding: 32px 20px;
+    padding: 28px 20px;
 
     text-align: center;
 
@@ -258,7 +483,10 @@ transition:
     }
 
     strong {
+        color: #0f172a;
+
         font-size: 13px;
+        font-weight: 800;
     }
 
     > span:last-child {
@@ -268,141 +496,54 @@ transition:
 
         font-size: 10px;
     }
-
-
 }
 
-/* ACTIVE WORKOUT */
 
-.active-workout {
-    margin-bottom: 22px;
-    padding: 16px;
+/* ========================================
+   SMALL IPHONE
+======================================== */
 
-    border: 1px solid #99f6e4;
-    border-radius: 18px;
+@media (max-width: 380px) {
 
-    background: #f0fdfa;
-}
-
-.active-workout-top {
-    display: flex;
-    align-items: center;
-
-    gap: 11px;
-}
-
-.active-workout-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 38px;
-    height: 38px;
-
-    flex-shrink: 0;
-
-    border-radius: 12px;
-
-    background: #0f5e6e;
-    color: white;
-
-    font-size: 13px;
-}
-
-.active-workout-info {
-    display: flex;
-    flex-direction: column;
-
-    span {
-        color: #0f5e6e;
-
-        font-size: 8px;
-        font-weight: 800;
-        letter-spacing: 0.8px;
+    .workout-page {
+        padding-left: 13px;
+        padding-right: 13px;
     }
 
-    strong {
-        margin-top: 2px;
+    .header {
+        margin-bottom: 15px;
 
-        color: #0f172a;
-
-        font-size: 14px;
+        h1 {
+            font-size: 24px;
+        }
     }
 
-    small {
-        margin-top: 3px;
-
-        color: #64748b;
-
-        font-size: 9px;
+    .workout-list {
+        gap: 9px;
     }
-}
 
-.active-workout-progress {
-    overflow: hidden;
-
-    height: 5px;
-
-    margin-top: 14px;
-
-    border-radius: 999px;
-
-    background: #ccfbf1;
-}
-
-.active-workout-progress-value {
-    height: 100%;
-
-    border-radius: inherit;
-
-    background: #0f5e6e;
-
-    transition: width 200ms ease;
-}
-
-.active-workout-actions {
-    display: grid;
-    grid-template-columns: 1fr auto;
-
-    gap: 8px;
-
-    margin-top: 14px;
-
-    button {
-        min-height: 40px;
-
-        border-radius: 11px;
-
-        font-size: 10px;
-        font-weight: 800;
-
-        cursor: pointer;
+    .workout-card {
+        padding: 13px;
     }
-}
 
-.resume-button {
-    border: 0;
+    .day {
+        width: 46px;
+        height: 46px;
 
-    background: #0f5e6e;
-    color: white;
-}
+        margin-right: 11px;
+    }
 
-.discard-button {
-    padding: 0 16px;
+    .info {
+        strong {
+            font-size: 15px;
+        }
+    }
 
-    border: 1px solid #cbd5e1;
+    .history {
+        margin-top: 18px;
+    }
 
-    background: white;
-    color: #475569;
-}
-
-
-/* DISABLED WORKOUT */
-
-.workout-card.disabled {
-    opacity: 0.45;
-
-    cursor: not-allowed;
-
-    pointer-events: none;
+    .history-card {
+        padding: 11px;
+    }
 }

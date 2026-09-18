@@ -2,12 +2,20 @@
     display: block;
 }
 
+
+/* ========================================
+   PAGE
+======================================== */
+
 .summary-page {
     width: 100%;
     max-width: 600px;
-
     margin: 0 auto;
-    padding: 30px 16px 110px;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        20px;
 }
 
 
@@ -20,7 +28,7 @@
     flex-direction: column;
     align-items: center;
 
-    padding: 22px 16px 26px;
+    padding: 14px 16px 20px;
 
     text-align: center;
 
@@ -29,10 +37,10 @@
         align-items: center;
         justify-content: center;
 
-        width: 58px;
-        height: 58px;
+        width: 52px;
+        height: 52px;
 
-        margin-bottom: 14px;
+        margin-bottom: 11px;
 
         border-radius: 50%;
 
@@ -40,10 +48,10 @@
         color: #fff;
 
         box-shadow:
-            0 10px 25px
-            rgba(15, 94, 110, 0.2);
+            0 8px 20px
+            rgba(15, 94, 110, 0.18);
 
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 800;
     }
 
@@ -56,16 +64,17 @@
     }
 
     h1 {
-        margin: 5px 0 0;
+        margin: 4px 0 0;
 
         color: #0f172a;
 
-        font-size: 25px;
+        font-size: 23px;
         font-weight: 800;
+        line-height: 1.1;
     }
 
     p {
-        margin: 6px 0 0;
+        margin: 5px 0 0;
 
         color: #94a3b8;
 
@@ -81,14 +90,14 @@
 .summary-stats {
     display: grid;
     grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2, minmax(0, 1fr));
 
     overflow: hidden;
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
     background: #fff;
 }
@@ -97,35 +106,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    padding: 18px 10px;
+    min-width: 0;
+
+    padding: 15px 8px;
 
     &:nth-child(odd) {
-        border-right:
-            1px solid #f1f5f9;
+        border-right: 1px solid #f1f5f9;
     }
 
     &:nth-child(-n + 2) {
-        border-bottom:
-            1px solid #f1f5f9;
+        border-bottom: 1px solid #f1f5f9;
     }
 
     strong {
         color: #0f172a;
 
-        font-size: 21px;
+        font-size: 19px;
         font-weight: 800;
         line-height: 1;
+
+        font-variant-numeric: tabular-nums;
     }
 
     span {
-        margin-top: 6px;
+        margin-top: 5px;
 
         color: #94a3b8;
 
         font-size: 7px;
         font-weight: 800;
         letter-spacing: 0.7px;
+
+        text-align: center;
     }
 }
 
@@ -137,20 +151,26 @@
 .pr-section {
     overflow: hidden;
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
     border: 1px solid #fed7aa;
-    border-radius: 18px;
+    border-radius: 16px;
 
     background: #fff;
 }
+
+
+/* ========================================
+   PR HEADER
+======================================== */
 
 .section-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
 
-    padding: 13px 14px;
+    padding: 12px 13px;
 
     border-bottom: 1px solid #ffedd5;
 
@@ -159,16 +179,21 @@
     > div {
         display: flex;
         align-items: center;
-
         gap: 9px;
 
+        min-width: 0;
+
         > span {
+            flex-shrink: 0;
+
             font-size: 17px;
         }
 
         > div {
             display: flex;
             flex-direction: column;
+
+            min-width: 0;
 
             strong {
                 color: #9a3412;
@@ -190,6 +215,7 @@
 
 .pr-count {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
 
@@ -205,15 +231,21 @@
 
     font-size: 9px;
     font-weight: 800;
+
+    font-variant-numeric: tabular-nums;
 }
+
+
+/* ========================================
+   PR ROW
+======================================== */
 
 .pr-row {
     display: flex;
     align-items: center;
-
     gap: 10px;
 
-    padding: 12px 14px;
+    padding: 11px 13px;
 
     border-bottom: 1px solid #fff7ed;
 
@@ -224,13 +256,12 @@
 
 .pr-icon {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
 
     width: 30px;
     height: 30px;
-
-    flex-shrink: 0;
 
     border-radius: 9px;
 
@@ -271,17 +302,17 @@
 
 .pr-weight {
     display: flex;
-    align-items: baseline;
-
-    gap: 3px;
-
     flex-shrink: 0;
+    align-items: baseline;
+    gap: 3px;
 
     strong {
         color: #c2410c;
 
         font-size: 15px;
         font-weight: 800;
+
+        font-variant-numeric: tabular-nums;
     }
 
     span {
@@ -299,24 +330,29 @@
 
 .summary-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
 
     gap: 9px;
 
-    margin-top: 20px;
+    margin-top: 18px;
 
     a {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        min-height: 48px;
+        min-width: 0;
+        min-height: 46px;
 
-        border-radius: 13px;
+        padding: 0 12px;
+
+        border-radius: 12px;
 
         font-size: 10px;
         font-weight: 800;
 
+        text-align: center;
         text-decoration: none;
 
         transition:
@@ -348,5 +384,86 @@
 
     &:hover {
         background: #0c4c59;
+    }
+}
+
+
+/* ========================================
+   SMALL IPHONE
+======================================== */
+
+@media (max-width: 380px) {
+
+    .summary-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .complete-header {
+        padding-top: 10px;
+        padding-bottom: 16px;
+
+        .complete-icon {
+            width: 48px;
+            height: 48px;
+
+            margin-bottom: 9px;
+
+            font-size: 20px;
+        }
+
+        h1 {
+            font-size: 21px;
+        }
+    }
+
+    .summary-stat {
+        padding: 13px 6px;
+
+        strong {
+            font-size: 18px;
+        }
+    }
+
+    .pr-row {
+        padding-right: 11px;
+        padding-left: 11px;
+    }
+
+    .summary-actions {
+        margin-top: 15px;
+
+        a {
+            min-height: 44px;
+        }
+    }
+}
+
+
+/* ========================================
+   SHORT MOBILE SCREENS
+======================================== */
+
+@media (max-height: 750px) {
+
+    .complete-header {
+        padding-top: 8px;
+        padding-bottom: 14px;
+
+        .complete-icon {
+            width: 46px;
+            height: 46px;
+
+            margin-bottom: 8px;
+        }
+    }
+
+    .summary-stat {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .summary-actions {
+        margin-top: 14px;
     }
 }

@@ -2,22 +2,32 @@
     display: block;
 }
 
+
+/* ========================================
+   PAGE
+======================================== */
+
 .detail-page {
     width: 100%;
     max-width: 600px;
-
     margin: 0 auto;
-    padding: 20px 18px 32px;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        20px;
 }
 
 
-/* HEADER */
+/* ========================================
+   HEADER
+======================================== */
 
 .detail-header {
     display: flex;
     align-items: center;
 
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 
     .back-button {
         display: flex;
@@ -25,34 +35,49 @@
         align-items: center;
         justify-content: center;
 
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
 
-        margin-right: 14px;
+        margin-right: 12px;
 
         border: 1px solid #e2e8f0;
-        border-radius: 13px;
+        border-radius: 12px;
 
-        background: white;
+        background: #fff;
         color: #0f172a;
 
         text-decoration: none;
 
-        font-size: 21px;
+        font-size: 20px;
+
+        cursor: pointer;
+
+        transition:
+            transform 150ms ease,
+            background 150ms ease;
+
+        &:active {
+            transform: scale(0.96);
+            background: #f8fafc;
+        }
     }
 
     .eyebrow {
         color: #0f5e6e;
 
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 800;
-        letter-spacing: 1.1px;
+        letter-spacing: 1px;
     }
 
     h1 {
         margin: 2px 0 0;
 
-        font-size: 25px;
+        color: #0f172a;
+
+        font-size: 23px;
+        font-weight: 800;
+        line-height: 1.1;
     }
 
     p {
@@ -65,49 +90,61 @@
 }
 
 
-/* SUMMARY */
+/* ========================================
+   SUMMARY
+======================================== */
 
 .summary {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     overflow: hidden;
 
-    margin-bottom: 27px;
+    margin-bottom: 22px;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
-    background: white;
+    background: #fff;
 }
 
 .summary-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    padding: 17px 7px;
+    min-width: 0;
+
+    padding: 14px 6px;
 
     border-right: 1px solid #e2e8f0;
+
+    text-align: center;
 
     &:last-child {
         border-right: 0;
     }
 
     > span {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
 
         color: #94a3b8;
 
-        font-size: 8px;
+        font-size: 7px;
         font-weight: 800;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.7px;
     }
 
     strong {
+        max-width: 100%;
+
         color: #0f172a;
 
-        font-size: 18px;
+        font-size: 17px;
+        font-weight: 800;
+
+        font-variant-numeric: tabular-nums;
     }
 
     small {
@@ -115,27 +152,35 @@
 
         color: #64748b;
 
-        font-size: 8px;
+        font-size: 7px;
     }
 }
 
 
-/* SECTION */
+/* ========================================
+   SECTION HEADER
+======================================== */
 
 .section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
 
-    margin-bottom: 11px;
+    margin-bottom: 10px;
 
     h2 {
         margin: 0;
 
-        font-size: 17px;
+        color: #0f172a;
+
+        font-size: 16px;
+        font-weight: 800;
     }
 
     span {
+        flex-shrink: 0;
+
         color: #94a3b8;
 
         font-size: 9px;
@@ -143,29 +188,35 @@
 }
 
 
-/* EXERCISES */
+/* ========================================
+   EXERCISES
+======================================== */
 
 .exercise-list {
     display: flex;
     flex-direction: column;
-
-    gap: 13px;
+    gap: 11px;
 }
 
 .exercise-card {
     overflow: hidden;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
-    background: white;
+    background: #fff;
 }
+
+
+/* ========================================
+   EXERCISE TITLE
+======================================== */
 
 .exercise-title {
     display: flex;
     align-items: center;
 
-    padding: 15px;
+    padding: 13px;
 }
 
 .exercise-number {
@@ -174,21 +225,27 @@
     align-items: center;
     justify-content: center;
 
-    width: 37px;
-    height: 37px;
+    width: 35px;
+    height: 35px;
 
-    margin-right: 11px;
+    margin-right: 10px;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     background: #ecf5f6;
     color: #0f5e6e;
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
 }
 
+.exercise-title > div:last-child {
+    min-width: 0;
+}
+
 .exercise-title span {
+    display: block;
+
     color: #0f5e6e;
 
     font-size: 7px;
@@ -199,24 +256,35 @@
 .exercise-title h3 {
     margin: 2px 0 0;
 
+    overflow: hidden;
+
+    color: #0f172a;
+
     font-size: 14px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 
-/* SET TABLE */
+/* ========================================
+   SET TABLE
+======================================== */
 
 .set-header,
 .set-row {
     display: grid;
+
     grid-template-columns:
-        45px
-        1fr
-        1fr
-        1fr;
+        40px
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
     align-items: center;
 
-    padding: 8px 14px;
+    padding: 8px 12px;
 
     text-align: center;
 }
@@ -234,14 +302,23 @@
 }
 
 .set-row {
-    min-height: 45px;
+    min-height: 43px;
 
     border-bottom: 1px solid #f8fafc;
 
-    font-size: 11px;
+    color: #0f172a;
+
+    font-size: 10px;
+
+    &:last-child {
+        border-bottom: 0;
+    }
 
     strong {
         font-size: 12px;
+        font-weight: 800;
+
+        font-variant-numeric: tabular-nums;
     }
 
     small {
@@ -251,17 +328,25 @@
     }
 }
 
+
+/* ========================================
+   SET NUMBER
+======================================== */
+
 .set-number {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    width: 27px;
-    height: 27px;
+    width: 26px;
+    height: 26px;
+
+    margin: 0 auto;
 
     border-radius: 8px;
 
     background: #f1f5f9;
+    color: #475569;
 
     font-size: 9px;
     font-weight: 800;
@@ -271,29 +356,104 @@
     color: #64748b;
 
     font-size: 9px;
+
+    font-variant-numeric: tabular-nums;
 }
 
 
-/* EXERCISE FOOTER */
+/* ========================================
+   EXERCISE FOOTER
+======================================== */
 
 .exercise-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
 
-    padding: 10px 14px;
+    padding: 9px 12px;
+
+    border-top: 1px solid #f1f5f9;
 
     background: #f8fafc;
 
     span {
         color: #64748b;
 
-        font-size: 9px;
+        font-size: 8px;
     }
 
     strong {
         color: #0f5e6e;
 
         font-size: 10px;
+        font-weight: 800;
+
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+
+/* ========================================
+   SMALL IPHONE
+======================================== */
+
+@media (max-width: 380px) {
+
+    .detail-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .detail-header {
+        margin-bottom: 15px;
+
+        .back-button {
+            width: 37px;
+            height: 37px;
+
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 21px;
+        }
+    }
+
+    .summary {
+        margin-bottom: 18px;
+    }
+
+    .summary-item {
+        padding: 12px 4px;
+
+        strong {
+            font-size: 15px;
+        }
+    }
+
+    .exercise-list {
+        gap: 9px;
+    }
+
+    .exercise-title {
+        padding: 11px;
+    }
+
+    .set-header,
+    .set-row {
+        grid-template-columns:
+            34px
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            minmax(0, 1fr);
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .exercise-footer {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

@@ -2,12 +2,20 @@
     display: block;
 }
 
+
+/* ========================================
+   PAGE
+======================================== */
+
 .session-page {
     width: 100%;
     max-width: 600px;
-
     margin: 0 auto;
-    padding: 22px 16px 120px;
+
+    padding:
+        max(16px, env(safe-area-inset-top))
+        16px
+        20px;
 }
 
 
@@ -18,20 +26,18 @@
 .session-header {
     display: flex;
     align-items: flex-start;
+    gap: 12px;
 
-    gap: 14px;
-
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 
     .back {
         display: flex;
+        flex-shrink: 0;
         align-items: center;
         justify-content: center;
 
-        width: 36px;
-        height: 36px;
-
-        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
 
         border: 1px solid #e2e8f0;
         border-radius: 11px;
@@ -58,9 +64,9 @@
     }
 
     .session-title {
-    flex: 1;
-    min-width: 0;
-}
+        flex: 1;
+        min-width: 0;
+    }
 
     span {
         display: block;
@@ -69,7 +75,7 @@
 
         color: #0f5e6e;
 
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 800;
         letter-spacing: 1px;
     }
@@ -79,13 +85,13 @@
 
         color: #0f172a;
 
-        font-size: 24px;
+        font-size: 23px;
         font-weight: 800;
         line-height: 1.1;
     }
 
     p {
-        margin: 5px 0 0;
+        margin: 4px 0 0;
 
         color: #64748b;
 
@@ -95,15 +101,54 @@
 
 
 /* ========================================
+   WORKOUT TIME
+======================================== */
+
+.workout-time {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+
+    padding: 7px 9px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    background: #fff;
+
+    > span {
+        margin: 0 0 2px;
+
+        color: #94a3b8;
+
+        font-size: 6px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+    }
+
+    > strong {
+        color: #0f5e6e;
+
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1;
+
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+
+/* ========================================
    SESSION PROGRESS
 ======================================== */
 
 .session-progress {
-    margin-bottom: 18px;
-    padding: 14px;
+    margin-bottom: 14px;
+    padding: 12px;
 
     border: 1px solid #e2e8f0;
-    border-radius: 16px;
+    border-radius: 14px;
 
     background: #fff;
 }
@@ -112,10 +157,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 10px;
 
-    margin-bottom: 9px;
+    margin-bottom: 8px;
 
     span {
         color: #64748b;
@@ -133,10 +177,10 @@
 }
 
 .progress-track {
-    overflow: hidden;
-
     width: 100%;
-    height: 6px;
+    height: 5px;
+
+    overflow: hidden;
 
     border-radius: 999px;
 
@@ -161,15 +205,14 @@
 .exercise-list {
     display: flex;
     flex-direction: column;
-
-    gap: 14px;
+    gap: 12px;
 }
 
 .exercise-card {
     overflow: hidden;
 
     border: 1px solid #e2e8f0;
-    border-radius: 18px;
+    border-radius: 16px;
 
     background: #fff;
 
@@ -186,10 +229,9 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 12px;
 
-    gap: 14px;
-
-    padding: 15px 14px 13px;
+    padding: 13px 12px 11px;
 
     > div:first-child {
         min-width: 0;
@@ -250,7 +292,7 @@
     display: inline-flex;
     align-items: center;
 
-    margin-top: 7px;
+    margin-top: 6px;
     padding: 4px 7px;
 
     border-radius: 7px;
@@ -262,6 +304,164 @@
     font-weight: 800;
 }
 
+.estimated-pr {
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   PROGRESSIVE OVERLOAD TARGET
+======================================== */
+
+.progressive-target {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 10px 12px;
+    padding: 10px;
+
+    border: 1px solid
+        rgba(15, 94, 110, 0.16);
+
+    border-radius: 11px;
+
+    background:
+        rgba(15, 94, 110, 0.055);
+}
+
+.target-icon {
+    display: flex;
+    flex: 0 0 32px;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 9px;
+
+    background: #fff;
+
+    font-size: 16px;
+}
+
+.target-content {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    > span {
+        color: #0f5e6e;
+
+        font-size: 7px;
+        font-weight: 900;
+        letter-spacing: 0.7px;
+    }
+
+    > strong {
+        margin-top: 2px;
+
+        color: #0f172a;
+
+        font-size: 14px;
+        font-weight: 900;
+        line-height: 1.2;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    > small {
+        margin-top: 3px;
+
+        color: #64748b;
+
+        font-size: 7px;
+        font-weight: 600;
+    }
+}
+
+.progressive-target.weight-unlocked {
+    border-color:
+        rgba(15, 94, 110, 0.28);
+
+    background:
+        rgba(15, 94, 110, 0.09);
+
+    .target-icon {
+        background:
+            rgba(255, 255, 255, 0.85);
+    }
+
+    .target-content {
+        > span,
+        > strong {
+            color: #0f5e6e;
+        }
+    }
+}
+
+
+/* ========================================
+   LIVE REP PROGRESS
+======================================== */
+
+.rep-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin: 8px 12px;
+    padding: 8px 10px;
+
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    strong {
+        font-size: 9px;
+        font-weight: 800;
+    }
+
+    span {
+        color: #64748b;
+
+        font-size: 7px;
+        font-weight: 600;
+    }
+
+    &.positive {
+        background:
+            rgba(15, 94, 110, 0.07);
+
+        strong {
+            color: #0f5e6e;
+        }
+    }
+
+    &.negative {
+        background:
+            rgba(220, 38, 38, 0.05);
+
+        strong {
+            color: #dc2626;
+        }
+    }
+
+    &.equal {
+        strong {
+            color: #64748b;
+        }
+    }
+}
+
 
 /* ========================================
    SET HEADER
@@ -269,17 +469,17 @@
 
 .set-header {
     display: grid;
+
     grid-template-columns:
-        42px
+        40px
         minmax(0, 1fr)
         minmax(0, 1fr)
-        42px;
+        40px;
 
     align-items: center;
+    gap: 7px;
 
-    gap: 8px;
-
-    padding: 7px 14px;
+    padding: 7px 12px;
 
     border-top: 1px solid #f1f5f9;
     border-bottom: 1px solid #f1f5f9;
@@ -292,6 +492,7 @@
         font-size: 7px;
         font-weight: 800;
         letter-spacing: 0.7px;
+
         text-align: center;
 
         &:first-child {
@@ -307,17 +508,17 @@
 
 .set-row {
     display: grid;
+
     grid-template-columns:
-        42px
+        40px
         minmax(0, 1fr)
         minmax(0, 1fr)
-        42px;
+        40px;
 
     align-items: center;
+    gap: 7px;
 
-    gap: 8px;
-
-    padding: 8px 14px;
+    padding: 7px 12px;
 
     border-bottom: 1px solid #f1f5f9;
 
@@ -341,7 +542,7 @@
         width: 100%;
         height: 38px;
 
-        padding: 0 8px;
+        padding: 0 7px;
 
         border: 1px solid #e2e8f0;
         border-radius: 9px;
@@ -353,6 +554,7 @@
 
         font-size: 12px;
         font-weight: 700;
+
         text-align: center;
 
         transition:
@@ -382,44 +584,9 @@
     font-weight: 800;
 }
 
+
 /* ========================================
-   WORKOUT TIME
-======================================== */
-
-.workout-time {
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: column;
-    align-items: flex-end;
-
-    padding: 7px 10px;
-
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-
-    background: #fff;
-
-    > span {
-        margin: 0 0 2px;
-
-        color: #94a3b8;
-
-        font-size: 6px;
-        font-weight: 800;
-        letter-spacing: 0.7px;
-    }
-
-    > strong {
-        color: #0f5e6e;
-
-        font-size: 14px;
-        font-weight: 800;
-        line-height: 1;
-        font-variant-numeric: tabular-nums;
-    }
-}
-/* ========================================
-   COMPLETE SET BUTTON
+   COMPLETE SET
 ======================================== */
 
 .complete-set {
@@ -465,12 +632,48 @@
 
 
 /* ========================================
+   SET PERFORMANCE
+======================================== */
+
+.set-performance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    margin: -2px 12px 8px;
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    > span {
+        color: #64748b;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+
+    > strong {
+        color: #0f5e6e;
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+
+        white-space: nowrap;
+    }
+}
+
+
+/* ========================================
    NEW PR
 ======================================== */
 
 .new-pr-message {
-    margin: 0 14px 8px;
-    padding: 7px 10px;
+    margin: 0 12px 8px;
+    padding: 7px 9px;
 
     border-radius: 9px;
 
@@ -487,7 +690,7 @@
 ======================================== */
 
 .last-session {
-    padding: 11px 14px 13px;
+    padding: 10px 12px 11px;
 
     border-top: 1px solid #f1f5f9;
 
@@ -496,7 +699,7 @@
     > span {
         display: block;
 
-        margin-bottom: 7px;
+        margin-bottom: 6px;
 
         color: #94a3b8;
 
@@ -517,7 +720,6 @@
 .last-sets {
     display: flex;
     flex-wrap: wrap;
-
     gap: 5px;
 
     strong {
@@ -550,12 +752,12 @@
 
 .finish-button {
     width: 100%;
-    min-height: 50px;
+    min-height: 48px;
 
-    margin-top: 20px;
+    margin-top: 18px;
 
     border: 0;
-    border-radius: 14px;
+    border-radius: 13px;
 
     background: #0f5e6e;
     color: #fff;
@@ -597,7 +799,10 @@
     position: fixed;
 
     right: 16px;
-    bottom: 88px;
+    bottom: calc(
+        80px +
+        env(safe-area-inset-bottom)
+    );
     left: 16px;
 
     z-index: 150;
@@ -605,19 +810,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 12px;
 
     width: calc(100% - 32px);
     max-width: 568px;
 
     margin: 0 auto;
-    padding: 14px 16px;
+    padding: 13px 14px;
 
     border: 1px solid
         rgba(255, 255, 255, 0.08);
 
-    border-radius: 17px;
+    border-radius: 16px;
 
     background: #0f172a;
     color: #fff;
@@ -643,7 +847,7 @@
 
     min-width: 0;
 
-    column-gap: 10px;
+    column-gap: 9px;
 
     > span {
         grid-column: 1 / -1;
@@ -660,16 +864,17 @@
     > strong {
         color: #fff;
 
-        font-size: 25px;
+        font-size: 24px;
         font-weight: 800;
         line-height: 1;
-        letter-spacing: -0.5px;
+
+        font-variant-numeric: tabular-nums;
     }
 
     > small {
-        overflow: hidden;
-
         max-width: 130px;
+
+        overflow: hidden;
 
         color: #cbd5e1;
 
@@ -688,22 +893,19 @@
 
 .rest-timer-actions {
     display: flex;
-    align-items: center;
-
     flex-shrink: 0;
-
-    gap: 8px;
+    align-items: center;
+    gap: 7px;
 }
 
 .rest-action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 5px;
 
     height: 38px;
-    padding: 0 12px;
+    padding: 0 11px;
 
     border: 0;
     border-radius: 10px;
@@ -722,9 +924,6 @@
         transform: scale(0.95);
     }
 }
-
-
-/* +30 SEC */
 
 .rest-action-add {
     background:
@@ -752,15 +951,11 @@
         rgba(255, 255, 255, 0.12);
 
     font-size: 14px;
-    font-weight: 500;
     line-height: 1;
 }
 
-
-/* SKIP */
-
 .rest-action-skip {
-    padding: 0 13px;
+    padding: 0 12px;
 
     background: #fff;
     color: #0f172a;
@@ -784,23 +979,25 @@
     position: fixed;
 
     right: 16px;
-    bottom: 88px;
+    bottom: calc(
+        80px +
+        env(safe-area-inset-bottom)
+    );
     left: 16px;
 
     z-index: 160;
 
     display: flex;
     align-items: center;
-
     gap: 11px;
 
     width: calc(100% - 32px);
     max-width: 568px;
 
     margin: 0 auto;
-    padding: 14px 16px;
+    padding: 13px 14px;
 
-    border-radius: 17px;
+    border-radius: 16px;
 
     background: #0f5e6e;
     color: #fff;
@@ -816,13 +1013,12 @@
 
 .rest-complete-icon {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
 
-    width: 36px;
-    height: 36px;
-
-    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
 
     border-radius: 50%;
 
@@ -831,7 +1027,7 @@
 
     color: #fff;
 
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 800;
 }
 
@@ -885,15 +1081,13 @@
     from {
         opacity: 0;
 
-        transform:
-            translateY(10px);
+        transform: translateY(10px);
     }
 
     to {
         opacity: 1;
 
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 }
 
@@ -905,15 +1099,23 @@
 @media (max-width: 420px) {
 
     .session-page {
-        padding-right: 12px;
         padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .session-header {
+        gap: 10px;
+
+        h1 {
+            font-size: 21px;
+        }
     }
 
     .exercise-header {
         gap: 8px;
 
-        padding-right: 12px;
-        padding-left: 12px;
+        padding-right: 11px;
+        padding-left: 11px;
     }
 
     .set-header,
@@ -926,8 +1128,8 @@
 
         gap: 6px;
 
-        padding-right: 12px;
-        padding-left: 12px;
+        padding-right: 10px;
+        padding-left: 10px;
     }
 
     .set-row input {
@@ -939,12 +1141,15 @@
         height: 36px;
     }
 
-    .rest-timer {
+    .rest-timer,
+    .rest-complete {
         right: 12px;
         left: 12px;
 
         width: calc(100% - 24px);
+    }
 
+    .rest-timer {
         padding: 12px;
     }
 
@@ -966,175 +1171,12 @@
 
     .rest-action {
         height: 36px;
-        padding: 0 10px;
+        padding: 0 9px;
 
         font-size: 9px;
     }
 
     .rest-action-skip {
-        padding: 0 11px;
-    }
-
-    .rest-complete {
-        right: 12px;
-        left: 12px;
-
-        width: calc(100% - 24px);
-    }
-
-    .estimated-pr {
-    margin-top: 4px;
-
-    color: #64748b;
-
-    font-size: 8px;
-    font-weight: 700;
-}
-
-/* ========================================
-   SET PERFORMANCE
-======================================== */
-
-.set-performance {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 8px;
-
-    margin: -2px 14px 8px;
-    padding: 6px 9px;
-
-    border-radius: 8px;
-
-    background: #f8fafc;
-
-    > span {
-        color: #64748b;
-
-        font-size: 8px;
-        font-weight: 700;
-    }
-
-    > strong {
-        color: #0f5e6e;
-
-        font-size: 7px;
-        font-weight: 800;
-        letter-spacing: 0.4px;
-
-        white-space: nowrap;
-    }
-}
-}
-
- /* ========================================
-   PROGRESSIVE OVERLOAD TARGET
-======================================== */
-
-.progressive-target {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    margin: 12px 0;
-    padding: 11px 12px;
-
-    border: 1px solid
-        rgba(15, 94, 110, 0.16);
-
-    border-radius: 12px;
-
-    background:
-        rgba(15, 94, 110, 0.055);
-}
-
-
-/* ICON */
-
-.target-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex: 0 0 34px;
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 10px;
-
-    background: #fff;
-
-    font-size: 17px;
-}
-
-
-/* CONTENT */
-
-.target-content {
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-
-    > span {
-        color: #0f5e6e;
-
-        font-size: 7px;
-        font-weight: 900;
-        letter-spacing: 0.7px;
-    }
-
-    > strong {
-        margin-top: 2px;
-
-        color: #0f172a;
-
-        font-size: 15px;
-        font-weight: 900;
-
-        line-height: 1.2;
-
-        font-variant-numeric:
-            tabular-nums;
-    }
-
-    > small {
-        margin-top: 3px;
-
-        color: #64748b;
-
-        font-size: 7px;
-        font-weight: 600;
-    }
-}
-
-/* ========================================
-   WEIGHT INCREASE UNLOCKED
-======================================== */
-
-.progressive-target.weight-unlocked {
-    border-color:
-        rgba(15, 94, 110, 0.28);
-
-    background:
-        rgba(15, 94, 110, 0.09);
-
-    .target-icon {
-        background:
-            rgba(255, 255, 255, 0.85);
-    }
-
-    .target-content {
-
-        > span {
-            color: #0f5e6e;
-        }
-
-        > strong {
-            color: #0f5e6e;
-        }
+        padding: 0 10px;
     }
 }
