@@ -531,3 +531,141 @@
         padding: 11px;
     }
 }
+
+
+/* ========================================
+   HOME - FIT IN MOBILE VIEWPORT
+======================================== */
+
+.home-page {
+    min-height: calc(100dvh - 72px);
+    max-width: 600px;
+    margin: 0 auto;
+
+    padding:
+        max(14px, env(safe-area-inset-top))
+        16px
+        16px;
+}
+
+
+/* HEADER */
+
+.home-header {
+    margin-bottom: 14px;
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+
+/* ENERGY */
+
+.balance-card {
+    padding: 14px 16px;
+}
+
+
+/* SECTIONS */
+
+.dashboard-section {
+    margin-top: 16px;
+}
+
+.section-header {
+    margin-bottom: 7px;
+
+    h2 {
+        font-size: 15px;
+    }
+}
+
+
+/* NUTRITION */
+
+.metric-card {
+    padding: 11px 12px;
+}
+
+.metric-value {
+    margin-top: 2px;
+
+    strong {
+        font-size: 18px;
+    }
+}
+
+.progress-track {
+    margin-top: 6px;
+}
+
+
+/* ACTIVITY */
+
+.activity-card {
+    padding: 10px 12px;
+}
+
+.activity-icon {
+    width: 28px;
+    height: 28px;
+}
+
+
+/* BODY WEIGHT */
+
+.weight-card {
+    margin-top: 16px;
+    padding: 12px 16px;
+
+    h2 {
+        font-size: 19px;
+    }
+}
+
+
+/* ========================================
+   SHORT MOBILE SCREENS
+======================================== */
+
+@media (max-height: 750px) {
+
+    .home-page {
+        padding-top: 10px;
+    }
+
+    .home-header {
+        margin-bottom: 10px;
+
+        h1 {
+            font-size: 23px;
+        }
+
+        p {
+            display: none;
+        }
+    }
+
+    .balance-card {
+        padding: 11px 14px;
+    }
+
+    .dashboard-section {
+        margin-top: 12px;
+    }
+
+    .section-header {
+        margin-bottom: 5px;
+    }
+
+    .metric-card,
+    .activity-card {
+        padding: 9px 10px;
+    }
+
+    .weight-card {
+        margin-top: 12px;
+        padding: 10px 14px;
+    }
+}
