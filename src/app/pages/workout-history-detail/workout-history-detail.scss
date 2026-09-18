@@ -1,0 +1,299 @@
+:host {
+    display: block;
+}
+
+.detail-page {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+    padding: 20px 18px 32px;
+}
+
+
+/* HEADER */
+
+.detail-header {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 22px;
+
+    .back-button {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+
+        width: 42px;
+        height: 42px;
+
+        margin-right: 14px;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 13px;
+
+        background: white;
+        color: #0f172a;
+
+        text-decoration: none;
+
+        font-size: 21px;
+    }
+
+    .eyebrow {
+        color: #0f5e6e;
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.1px;
+    }
+
+    h1 {
+        margin: 2px 0 0;
+
+        font-size: 25px;
+    }
+
+    p {
+        margin: 3px 0 0;
+
+        color: #64748b;
+
+        font-size: 10px;
+    }
+}
+
+
+/* SUMMARY */
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    overflow: hidden;
+
+    margin-bottom: 27px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    background: white;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 17px 7px;
+
+    border-right: 1px solid #e2e8f0;
+
+    &:last-child {
+        border-right: 0;
+    }
+
+    > span {
+        margin-bottom: 5px;
+
+        color: #94a3b8;
+
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+    }
+
+    strong {
+        color: #0f172a;
+
+        font-size: 18px;
+    }
+
+    small {
+        margin-top: 1px;
+
+        color: #64748b;
+
+        font-size: 8px;
+    }
+}
+
+
+/* SECTION */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 11px;
+
+    h2 {
+        margin: 0;
+
+        font-size: 17px;
+    }
+
+    span {
+        color: #94a3b8;
+
+        font-size: 9px;
+    }
+}
+
+
+/* EXERCISES */
+
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+.exercise-card {
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    background: white;
+}
+
+.exercise-title {
+    display: flex;
+    align-items: center;
+
+    padding: 15px;
+}
+
+.exercise-number {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    width: 37px;
+    height: 37px;
+
+    margin-right: 11px;
+
+    border-radius: 11px;
+
+    background: #ecf5f6;
+    color: #0f5e6e;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.exercise-title span {
+    color: #0f5e6e;
+
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+.exercise-title h3 {
+    margin: 2px 0 0;
+
+    font-size: 14px;
+}
+
+
+/* SET TABLE */
+
+.set-header,
+.set-row {
+    display: grid;
+    grid-template-columns:
+        45px
+        1fr
+        1fr
+        1fr;
+
+    align-items: center;
+
+    padding: 8px 14px;
+
+    text-align: center;
+}
+
+.set-header {
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+
+    background: #f8fafc;
+    color: #94a3b8;
+
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.set-row {
+    min-height: 45px;
+
+    border-bottom: 1px solid #f8fafc;
+
+    font-size: 11px;
+
+    strong {
+        font-size: 12px;
+    }
+
+    small {
+        color: #94a3b8;
+
+        font-size: 7px;
+    }
+}
+
+.set-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.set-volume {
+    color: #64748b;
+
+    font-size: 9px;
+}
+
+
+/* EXERCISE FOOTER */
+
+.exercise-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 14px;
+
+    background: #f8fafc;
+
+    span {
+        color: #64748b;
+
+        font-size: 9px;
+    }
+
+    strong {
+        color: #0f5e6e;
+
+        font-size: 10px;
+    }
+}

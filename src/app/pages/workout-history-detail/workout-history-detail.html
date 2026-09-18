@@ -1,0 +1,252 @@
+<p>workout-history-detail works!</p>
+@if (session; as workout) {
+
+    <div class="detail-page">
+
+        <!-- HEADER -->
+
+        <header class="detail-header">
+
+            <a
+                routerLink="/workout"
+                class="back-button"
+            >
+                ←
+            </a>
+
+
+            <div>
+
+                <span class="eyebrow">
+                    WORKOUT HISTORY
+                </span>
+
+                <h1>
+                    {{ workout.workoutName }}
+                </h1>
+
+                <p>
+                    {{
+                        workout.date
+                        | date:'EEEE, dd MMMM yyyy'
+                    }}
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- SUMMARY -->
+
+        <section class="summary">
+
+            <div class="summary-item">
+
+                <span>
+                    DURATION
+                </span>
+
+                <strong>
+                    {{ workout.durationMinutes }}
+                </strong>
+
+                <small>
+                    min
+                </small>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    VOLUME
+                </span>
+
+                <strong>
+                    {{
+                        workout.totalVolume
+                        | number:'1.0-0'
+                    }}
+                </strong>
+
+                <small>
+                    kg
+                </small>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    EXERCISES
+                </span>
+
+                <strong>
+                    {{ workout.exercises.length }}
+                </strong>
+
+                <small>
+                    total
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXERCISES -->
+
+        <section class="exercises">
+
+            <div class="section-header">
+
+                <h2>
+                    Exercises
+                </h2>
+
+                <span>
+                    {{ workout.exercises.length }}
+                    completed
+                </span>
+
+            </div>
+
+
+            <div class="exercise-list">
+
+                @for (
+                    exercise of workout.exercises;
+                    track exercise.exerciseId;
+                    let exerciseIndex = $index
+                ) {
+
+                    <article class="exercise-card">
+
+                        <!-- TITLE -->
+
+                        <div class="exercise-title">
+
+                            <div class="exercise-number">
+                                {{ exerciseIndex + 1 }}
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    EXERCISE
+                                </span>
+
+                                <h3>
+                                    {{ exercise.exerciseName }}
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TABLE HEADER -->
+
+                        <div class="set-header">
+
+                            <span>
+                                SET
+                            </span>
+
+                            <span>
+                                WEIGHT
+                            </span>
+
+                            <span>
+                                REPS
+                            </span>
+
+                            <span>
+                                VOLUME
+                            </span>
+
+                        </div>
+
+
+                        <!-- SETS -->
+
+                        @for (
+                            set of exercise.sets;
+                            track set.setNumber
+                        ) {
+
+                            <div class="set-row">
+
+                                <span class="set-number">
+                                    {{ set.setNumber }}
+                                </span>
+
+
+                                <strong>
+                                    {{ set.weight ?? 0 }}
+                                    <small>kg</small>
+                                </strong>
+
+
+                                <strong>
+                                    {{ set.reps ?? 0 }}
+                                </strong>
+
+
+                                <span class="set-volume">
+
+                                    {{
+                                        (
+                                            (set.weight ?? 0) *
+                                            (set.reps ?? 0)
+                                        )
+                                        | number:'1.0-0'
+                                    }}
+
+                                    kg
+
+                                </span>
+
+                            </div>
+
+                        }
+
+
+                        <!-- EXERCISE TOTAL -->
+
+                        <div class="exercise-footer">
+
+                            <span>
+                                Exercise volume
+                            </span>
+
+                            <strong>
+
+                                {{
+                                    getExerciseVolume(
+                                        exercise.sets
+                                    )
+                                    | number:'1.0-0'
+                                }}
+
+                                kg
+
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                }
+
+            </div>
+
+        </section>
+
+    </div>
+
+}

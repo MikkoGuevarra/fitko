@@ -1,0 +1,407 @@
+<div class="home-page">
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header class="home-header">
+
+        <div>
+            <span class="eyebrow">
+                TODAY
+            </span>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Your daily fitness overview.
+            </p>
+        </div>
+
+
+        <div class="weight-badge">
+
+            <span>
+                WEIGHT
+            </span>
+
+            <strong>
+                {{ currentWeight }}
+            </strong>
+
+            <small>
+                kg
+            </small>
+
+        </div>
+
+    </header>
+
+
+    <!-- ========================================
+         ENERGY BALANCE
+    ========================================= -->
+
+    @if (todayEnergyBalance; as balance) {
+
+        <section
+            class="balance-card"
+            [class.surplus]="balance.deficit < 0"
+        >
+
+            <div>
+
+                <span class="card-label">
+
+                    @if (balance.deficit >= 0) {
+                        ESTIMATED DEFICIT
+                    } @else {
+                        ESTIMATED SURPLUS
+                    }
+
+                </span>
+
+
+                <strong>
+
+                    @if (balance.deficit >= 0) {
+
+                        -{{ balance.deficit }}
+
+                    } @else {
+
+                        +{{ -balance.deficit }}
+
+                    }
+
+                    <small>
+                        kcal
+                    </small>
+
+                </strong>
+
+            </div>
+
+
+            <div class="balance-info">
+
+                <span>
+                    {{ balance.caloriesEaten }}
+                    eaten
+                </span>
+
+                <span class="dot">
+                    •
+                </span>
+
+                <span>
+                    {{ balance.totalExpenditure }}
+                    burned
+                </span>
+
+            </div>
+
+        </section>
+
+    } @else {
+
+        <section class="balance-card empty">
+
+            <div>
+
+                <span class="card-label">
+                    ENERGY BALANCE
+                </span>
+
+                <strong>
+                    —
+                </strong>
+
+            </div>
+
+
+            <p>
+                Log today's nutrition to calculate
+                your energy balance.
+            </p>
+
+        </section>
+
+    }
+
+
+    <!-- ========================================
+         NUTRITION
+    ========================================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <span class="eyebrow">
+                    NUTRITION
+                </span>
+
+                <h2>
+                    Today's intake
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="nutrition-grid">
+
+
+            <!-- CALORIES -->
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    Calories
+                </span>
+
+
+                <div class="metric-value">
+
+                    <strong>
+                        {{
+                            todayNutrition?.calories
+                            ?? 0
+                        }}
+                    </strong>
+
+                    <span>
+                        / {{ calorieTarget }}
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        [style.width.%]="calorieProgress"
+                    ></div>
+
+                </div>
+
+
+                <small>
+                    kcal
+                </small>
+
+            </div>
+
+
+            <!-- PROTEIN -->
+
+            <div class="metric-card">
+
+                <span class="metric-label">
+                    Protein
+                </span>
+
+
+                <div class="metric-value">
+
+                    <strong>
+                        {{
+                            todayNutrition?.protein
+                            ?? 0
+                        }}
+                    </strong>
+
+                    <span>
+                        / {{ proteinTarget }}
+                    </span>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        [style.width.%]="proteinProgress"
+                    ></div>
+
+                </div>
+
+
+                <small>
+                    grams
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         TODAY'S ACTIVITY
+    ========================================= -->
+
+    <section class="dashboard-section">
+
+        <div class="section-header">
+
+            <div>
+                <span class="eyebrow">
+                    ACTIVITY
+                </span>
+
+                <h2>
+                    Today's training
+                </h2>
+            </div>
+
+        </div>
+
+
+        <div class="activity-grid">
+
+
+            <!-- WORKOUT -->
+
+            <div
+                class="activity-card"
+                [class.completed]="hasWorkoutToday"
+            >
+
+                <div class="activity-icon">
+
+                    @if (hasWorkoutToday) {
+                        ✓
+                    } @else {
+                        —
+                    }
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Workout
+                    </span>
+
+
+                    @if (hasWorkoutToday) {
+
+                        <strong>
+                            {{ todayWorkoutCalories }}
+                            kcal
+                        </strong>
+
+                    } @else {
+
+                        <strong>
+                            Not logged
+                        </strong>
+
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- RUNNING -->
+
+            <div
+                class="activity-card"
+                [class.completed]="hasRunToday"
+            >
+
+                <div class="activity-icon">
+
+                    @if (hasRunToday) {
+                        ✓
+                    } @else {
+                        —
+                    }
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Running
+                    </span>
+
+
+                    @if (hasRunToday) {
+
+                        <strong>
+                            {{ todayRunningCalories }}
+                            kcal
+                        </strong>
+
+                    } @else {
+
+                        <strong>
+                            Not logged
+                        </strong>
+
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         WEIGHT
+    ========================================= -->
+
+    <section class="weight-card">
+
+        <div>
+
+            <span class="eyebrow">
+                BODY WEIGHT
+            </span>
+
+            <h2>
+                {{ currentWeight }} kg
+            </h2>
+
+            <p>
+                Goal {{ fitnessService.goalWeight }} kg
+            </p>
+
+        </div>
+
+
+        <div class="weight-progress">
+
+            <strong>
+                {{
+                    fitnessService
+                        .weightLost()
+                        .toFixed(1)
+                }}
+                kg
+            </strong>
+
+            <span>
+                lost
+            </span>
+
+        </div>
+
+    </section>
+
+</div>

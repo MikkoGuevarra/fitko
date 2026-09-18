@@ -1,0 +1,197 @@
+@if (session; as session) {
+
+  <div class="summary-page">
+
+    <!-- COMPLETE -->
+
+    <section class="complete-header">
+
+      <div class="complete-icon">
+        ✓
+      </div>
+
+      <span>
+        WORKOUT COMPLETE
+      </span>
+
+      <h1>
+        {{ session.workoutName }}
+      </h1>
+
+      <p>
+        {{ session.date | date: "EEEE, d MMMM" }}
+      </p>
+
+    </section>
+
+
+    <!-- MAIN STATS -->
+
+    <section class="summary-stats">
+
+      <div class="summary-stat">
+
+        <strong>
+          {{ session.durationMinutes }}
+        </strong>
+
+        <span>
+          MINUTES
+        </span>
+
+      </div>
+
+
+      <div class="summary-stat">
+
+        <strong>
+          {{ completedSets }}
+        </strong>
+
+        <span>
+          SETS
+        </span>
+
+      </div>
+
+
+      <div class="summary-stat">
+
+        <strong>
+          {{ session.exercises.length }}
+        </strong>
+
+        <span>
+          EXERCISES
+        </span>
+
+      </div>
+
+
+      <div class="summary-stat">
+
+        <strong>
+          {{
+            session.totalVolume
+              | number: "1.0-0"
+          }}
+        </strong>
+
+        <span>
+          KG VOLUME
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- PERSONAL RECORDS -->
+
+    @if (personalRecords.length) {
+
+      <section class="pr-section">
+
+        <div class="section-title">
+
+          <div>
+            <span>
+              🏆
+            </span>
+
+            <div>
+              <strong>
+                Personal records
+              </strong>
+
+              <small>
+                New bests from this workout
+              </small>
+            </div>
+          </div>
+
+
+          <span class="pr-count">
+            {{ personalRecords.length }}
+          </span>
+
+        </div>
+
+
+        <div class="pr-list">
+
+          @for (
+            record of personalRecords;
+            track record.exerciseId
+          ) {
+
+            <div class="pr-row">
+
+              <div class="pr-icon">
+                ↑
+              </div>
+
+
+              <div class="pr-info">
+
+                <strong>
+                  {{ record.exerciseName }}
+                </strong>
+
+                <span>
+                  New personal record
+                </span>
+
+              </div>
+
+
+              <div class="pr-weight">
+
+                <strong>
+                  {{ record.weight }}
+                </strong>
+
+                <span>
+                  kg
+                </span>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+    }
+
+
+    <!-- ACTIONS -->
+
+    <div class="summary-actions">
+
+      <a
+        class="view-workout"
+        [routerLink]="[
+          '/workout/history',
+          session.id
+        ]"
+      >
+        View workout
+      </a>
+
+
+      <a
+        class="done-button"
+        routerLink="/workout"
+      >
+        Done
+      </a>
+
+    </div>
+
+  </div>
+
+}

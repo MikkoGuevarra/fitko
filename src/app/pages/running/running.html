@@ -1,0 +1,496 @@
+<div class="running-page">
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <header class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        RUNNING
+      </p>
+
+      <h1>
+        Run tracker
+      </h1>
+
+      <p>
+        Log your runs and track your weekly distance.
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- ========================================
+       WEEKLY PROGRESS
+  ========================================= -->
+
+  <section class="weekly-card">
+
+    <div class="weekly-header">
+
+      <div>
+
+        <span>
+          THIS WEEK
+        </span>
+
+        <strong>
+          {{ runningService.kmThisWeek() | number: "1.0-1" }}
+          /
+          {{ fitness.weeklyRunningGoal() }}
+          km
+        </strong>
+
+      </div>
+
+
+      <div class="run-icon">
+        🏃
+      </div>
+
+    </div>
+
+
+    <div class="progress-track">
+
+      <div
+        class="progress-value"
+        [style.width.%]="
+          (
+            runningService.kmThisWeek() /
+            fitness.weeklyRunningGoal()
+          ) * 100 > 100
+            ? 100
+            : (
+                runningService.kmThisWeek() /
+                fitness.weeklyRunningGoal()
+              ) * 100
+        "
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       ADD RUN
+  ========================================= -->
+
+  <section class="add-run-card">
+
+    <span class="card-label">
+      NEW RUN
+    </span>
+
+    <h2>
+      Add run
+    </h2>
+
+
+    <!-- DISTANCE -->
+
+    <label class="field-label">
+      Distance
+    </label>
+
+
+    <div class="input-with-unit">
+
+      <input
+        type="number"
+        inputmode="decimal"
+        min="0"
+        step="0.1"
+        placeholder="7.0"
+        [(ngModel)]="distanceKm"
+      />
+
+      <span>
+        km
+      </span>
+
+    </div>
+
+
+    <!-- TIME -->
+
+    <label class="field-label">
+      Time
+    </label>
+
+
+    <div class="time-inputs">
+
+      <!-- HOURS -->
+
+      <div class="time-field">
+
+        <input
+          type="number"
+          inputmode="numeric"
+          min="0"
+          placeholder="0"
+          [(ngModel)]="hours"
+        />
+
+        <span>
+          hours
+        </span>
+
+      </div>
+
+
+      <!-- MINUTES -->
+
+      <div class="time-field">
+
+        <input
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max="59"
+          placeholder="45"
+          [(ngModel)]="minutes"
+        />
+
+        <span>
+          min
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================================
+         RUN PREVIEW
+    ========================================= -->
+
+    @if (
+      distanceKm !== null &&
+      distanceKm > 0 &&
+      durationMinutes > 0
+    ) {
+
+      <div class="run-preview">
+
+        <!-- PACE -->
+
+        <div>
+
+          <span>
+            PACE
+          </span>
+
+          <strong>
+            {{
+              runningService.formatPace(
+                durationMinutes /
+                distanceKm
+              )
+            }}
+            /km
+          </strong>
+
+        </div>
+
+
+        <!-- CALORIES -->
+
+        <div>
+
+          <span>
+            EST. CALORIES
+          </span>
+
+          <strong>
+            {{
+              (
+                fitness.currentWeight() *
+                distanceKm
+              ).toFixed(0)
+            }}
+            kcal
+          </strong>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- SAVE RUN -->
+
+    <button
+      type="button"
+      class="save-run"
+      [disabled]="
+        distanceKm === null ||
+        distanceKm <= 0 ||
+        durationMinutes <= 0
+      "
+      (click)="saveRun()"
+    >
+      Save run
+    </button>
+
+  </section>
+
+
+  <!-- ========================================
+       PERSONAL BESTS
+  ========================================= -->
+
+  @if (
+    runningService.runningPersonalBests().length
+  ) {
+
+    <section class="personal-bests">
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="section-label">
+            RECORDS
+          </span>
+
+          <h2>
+            Personal bests
+          </h2>
+
+        </div>
+
+
+        <span>
+          🏆
+        </span>
+
+      </div>
+
+
+      <!-- PB GRID -->
+
+      <div class="pb-grid">
+
+        @for (
+          record of runningService.runningPersonalBests();
+          track record.distance
+        ) {
+
+          @if (
+            record.best;
+            as best
+          ) {
+
+            <div class="pb-card">
+
+
+              <!-- DISTANCE -->
+
+              <div class="pb-distance">
+
+                <span>
+                  DISTANCE
+                </span>
+
+                <strong>
+                  {{ record.label }}
+                </strong>
+
+              </div>
+
+
+              <!-- BEST TIME -->
+
+              <div class="pb-time">
+
+                <span>
+                  BEST TIME
+                </span>
+
+                <strong>
+                  {{
+                    runningService.formatDuration(
+                      best.durationMinutes
+                    )
+                  }}
+                </strong>
+
+              </div>
+
+
+              <!-- PACE + DATE -->
+
+              <div class="pb-footer">
+
+                <span>
+                  {{
+                    runningService.formatPace(
+                      best.averagePace
+                    )
+                  }}
+                  /km
+                </span>
+
+                <span>
+                  {{
+                    best.date
+                      | date: "dd MMM yyyy"
+                  }}
+                </span>
+
+              </div>
+
+            </div>
+
+          }
+
+        }
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- ========================================
+       RECENT RUNS
+  ========================================= -->
+
+  <section class="history">
+
+    <h2>
+      Recent runs
+    </h2>
+
+
+    <div class="run-list">
+
+      @for (
+        run of runningService.sessions();
+        track run.id
+      ) {
+
+        <div class="run-card">
+
+
+          <!-- DATE -->
+
+          <div class="run-date">
+
+            <strong>
+              {{
+                run.date
+                  | date: "dd MMM"
+              }}
+            </strong>
+
+            <span>
+              {{
+                run.date
+                  | date: "yyyy"
+              }}
+            </span>
+
+          </div>
+
+
+          <!-- DISTANCE + TIME -->
+
+          <div class="run-main">
+
+            <strong>
+              {{
+                run.distanceKm
+                  | number: "1.1-1"
+              }}
+              km
+            </strong>
+
+            <span>
+              {{ run.durationMinutes }}
+              min
+            </span>
+
+          </div>
+
+
+          <!-- PACE -->
+
+          <div class="run-stats">
+
+            <strong>
+              {{
+                runningService.formatPace(
+                  run.averagePace
+                )
+              }}
+            </strong>
+
+            <span>
+              /km
+            </span>
+
+          </div>
+
+
+          <!-- CALORIES -->
+
+          <div class="calories">
+
+            <strong>
+              {{ run.estimatedCalories }}
+            </strong>
+
+            <span>
+              kcal
+            </span>
+
+          </div>
+
+
+          <!-- DELETE -->
+
+          <button
+            type="button"
+            class="delete-button"
+            (click)="deleteRun(run.id)"
+            aria-label="Delete run"
+          >
+            ×
+          </button>
+
+        </div>
+
+      } @empty {
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty">
+
+          <strong>
+            No runs yet
+          </strong>
+
+          <span>
+            Your running history will appear here.
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+</div>

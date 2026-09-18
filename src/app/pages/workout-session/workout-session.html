@@ -1,0 +1,743 @@
+@if (workout(); as workout) {
+
+  <div class="session-page">
+
+    <!-- ========================================
+         HEADER
+    ========================================= -->
+
+    <header class="session-header">
+
+      <a
+        routerLink="/workout"
+        class="back"
+      >
+        ←
+      </a>
+
+      <div class="session-title">
+
+        <span>
+          {{ workout.label }}
+        </span>
+
+        <h1>
+          {{ workout.name }}
+        </h1>
+
+        <p>
+          {{ workout.exercises.length }}
+          exercises
+        </p>
+
+      </div>
+
+
+      <div class="workout-time">
+
+        <span>
+          WORKOUT TIME
+        </span>
+
+        <strong>
+          {{
+            formatWorkoutTime(
+              workoutElapsedSeconds()
+            )
+          }}
+        </strong>
+
+      </div>
+
+    </header>
+
+
+    <!-- ========================================
+         SESSION PROGRESS
+    ========================================= -->
+
+    <section class="session-progress">
+
+      <div class="progress-info">
+
+        <span>
+          Workout progress
+        </span>
+
+        <strong>
+          {{ completedSets() }}
+          /
+          {{ totalSets() }}
+          sets
+        </strong>
+
+      </div>
+
+
+      <div class="progress-track">
+
+        <div
+          class="progress-value"
+          [style.width.%]="progress()"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ========================================
+         EXERCISES
+    ========================================= -->
+
+    <div class="exercise-list">
+
+      @for (
+        exercise of workout.exercises;
+        track exercise.id;
+        let exerciseIndex = $index
+      ) {
+
+        <section class="exercise-card">
+
+
+          <!-- ========================================
+               EXERCISE HEADER
+          ========================================= -->
+
+          <div class="exercise-header">
+
+            <div>
+
+              <span class="exercise-number">
+                EXERCISE
+                {{ exerciseIndex + 1 }}
+              </span>
+
+              <h2>
+                {{ exercise.name }}
+              </h2>
+
+
+              <!-- HEAVIEST PR -->
+
+              @if (
+                getExercisePR(
+                  exercise.id
+                );
+                as exercisePR
+              ) {
+
+                <div class="current-pr">
+
+                  🏆 PR
+                  {{ exercisePR }}
+                  kg
+
+                </div>
+
+              }
+
+
+              <!-- ESTIMATED 1RM -->
+
+              @if (
+                getExerciseEstimated1RM(
+                  exercise.id
+                );
+                as estimated1RM
+              ) {
+
+                <div class="estimated-pr">
+
+                  Estimated 1RM
+
+                  {{
+                    estimated1RM
+                      | number: "1.1-1"
+                  }}
+
+                  kg
+
+                </div>
+
+              }
+
+            </div>
+
+
+            <!-- PROGRAM TARGET -->
+
+            <div class="target">
+
+              <strong>
+                {{ exercise.sets }}
+                ×
+                {{ exercise.minReps }}-{{ exercise.maxReps }}
+              </strong>
+
+              <span>
+                {{ exercise.restSeconds }}s rest
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ========================================
+               SET HEADER
+          ========================================= -->
+
+          <div class="set-header">
+
+            <span>SET</span>
+
+            <span>KG</span>
+
+            <span>REPS</span>
+
+            <span></span>
+
+          </div>
+
+
+          <!-- ========================================
+               SETS
+          ========================================= -->
+
+          @for (
+            set of exerciseLogs()[exerciseIndex].sets;
+            track set.setNumber;
+            let setIndex = $index
+          ) {
+
+            <div
+              class="set-row"
+              [class.completed]="set.completed"
+              [class.new-pr]="
+                set.completed &&
+                isNewPR(
+                  exercise.id,
+                  set.weight
+                )
+              "
+            >
+
+              <div class="set-number">
+                {{ set.setNumber }}
+              </div>
+
+
+              <!-- WEIGHT -->
+
+              <input
+                type="number"
+                inputmode="decimal"
+                min="0"
+                step="0.5"
+                placeholder="0"
+                [ngModel]="set.weight"
+                (ngModelChange)="
+                  updateWeight(
+                    exerciseIndex,
+                    setIndex,
+                    $event
+                  )
+                "
+              />
+
+
+              <!-- REPS -->
+
+              <input
+                type="number"
+                inputmode="numeric"
+                min="0"
+                step="1"
+                placeholder="0"
+                [ngModel]="set.reps"
+                (ngModelChange)="
+                  updateReps(
+                    exerciseIndex,
+                    setIndex,
+                    $event
+                  )
+                "
+              />
+
+
+              <!-- COMPLETE -->
+
+              <button
+                type="button"
+                class="complete-set"
+                [class.checked]="set.completed"
+                (click)="
+                  toggleSet(
+                    exerciseIndex,
+                    setIndex
+                  )
+                "
+              >
+
+                @if (set.completed) {
+                  ✓
+                } @else {
+                  ○
+                }
+
+              </button>
+
+            </div>
+
+
+            <!-- ========================================
+                 SET PERFORMANCE
+            ========================================= -->
+
+            @if (
+              set.completed &&
+              getSetEstimated1RM(
+                set.weight,
+                set.reps
+              );
+              as estimated1RM
+            ) {
+
+              <div class="set-performance">
+
+                <span>
+
+                  Est. 1RM
+
+                  {{
+                    estimated1RM
+                      | number: "1.1-1"
+                  }}
+
+                  kg
+
+                </span>
+
+
+                @if (
+                  isNewEstimated1RMPR(
+                    exercise.id,
+                    set.weight,
+                    set.reps
+                  )
+                ) {
+
+                  <strong>
+                    ⚡ NEW EST. 1RM PR
+                  </strong>
+
+                }
+
+              </div>
+
+            }
+
+
+            <!-- ========================================
+                 WEIGHT PR
+            ========================================= -->
+
+            @if (
+              set.completed &&
+              isNewPR(
+                exercise.id,
+                set.weight
+              )
+            ) {
+
+              <div class="new-pr-message">
+
+                🏆 NEW PERSONAL RECORD —
+                {{ set.weight }} kg
+
+              </div>
+
+            }
+
+          }
+
+
+          <!-- ========================================
+               LIVE REP PROGRESS
+          ========================================= -->
+
+          @let repProgress =
+            getRepProgress(
+              exerciseIndex,
+              exercise.id
+            );
+
+          @if (
+            repProgress !== null
+          ) {
+
+            <div
+              class="rep-progress"
+              [class.positive]="
+                repProgress > 0
+              "
+              [class.negative]="
+                repProgress < 0
+              "
+              [class.equal]="
+                repProgress === 0
+              "
+            >
+
+              @if (
+                repProgress > 0
+              ) {
+
+                <strong>
+                  📈 +{{ repProgress }}
+                  reps
+                </strong>
+
+                <span>
+                  vs last workout
+                </span>
+
+              } @else if (
+                repProgress < 0
+              ) {
+
+                <strong>
+                  📉 {{ repProgress }}
+                  reps
+                </strong>
+
+                <span>
+                  vs last workout
+                </span>
+
+              } @else {
+
+                <strong>
+                  = Same reps
+                </strong>
+
+                <span>
+                  as last workout
+                </span>
+
+              }
+
+            </div>
+
+          }
+
+
+          <!-- ========================================
+               LAST SESSION
+          ========================================= -->
+
+          <div class="last-session">
+
+            <span>
+              LAST SESSION
+            </span>
+
+
+            @if (
+              getLastExercise(
+                exercise.id
+              );
+              as lastExercise
+            ) {
+
+              <div class="last-sets">
+
+                @for (
+                  lastSet of lastExercise.sets;
+                  track lastSet.setNumber
+                ) {
+
+                  <strong>
+
+                    {{ lastSet.weight }}kg
+                    ×
+                    {{ lastSet.reps }}
+
+                  </strong>
+
+                }
+
+              </div>
+
+
+              <p class="progressive-hint">
+
+                ↑ Try to beat your
+                previous workout
+
+              </p>
+
+            } @else {
+
+              <p>
+                No previous data
+              </p>
+
+            }
+
+          </div>
+
+
+          <!-- ========================================
+               TODAY'S TARGET
+          ========================================= -->
+
+        @if (
+  getProgressiveSuggestion(
+    exercise.id,
+    exercise.sets,
+    exercise.minReps,
+    exercise.maxReps
+  );
+  as suggestion
+) {
+
+            <div
+              class="progressive-target"
+              [class.weight-unlocked]="
+                suggestion.message.includes(
+                  'Weight increase unlocked'
+                )
+              "
+            >
+
+              <div class="target-icon">
+
+                @if (
+                  suggestion.message.includes(
+                    "Weight increase unlocked"
+                  )
+                ) {
+
+                  🔥
+
+                } @else {
+
+                  🎯
+
+                }
+
+              </div>
+
+
+              <div class="target-content">
+
+                <span>
+
+                  @if (
+                    suggestion.message.includes(
+                      "Weight increase unlocked"
+                    )
+                  ) {
+
+                    WEIGHT INCREASE UNLOCKED
+
+                  } @else {
+
+                    TODAY'S TARGET
+
+                  }
+
+                </span>
+
+
+                <strong>
+
+                  {{ suggestion.weight }}
+                  kg
+                  ×
+                  {{ suggestion.reps }}
+
+                </strong>
+
+
+                <small>
+
+                  @if (
+                    suggestion.message.includes(
+                      "Weight increase unlocked"
+                    )
+                  ) {
+
+                    You completed the full rep
+                    range last workout
+
+                  } @else {
+
+                    Beat your weakest set
+                    from last workout
+
+                  }
+
+                </small>
+
+              </div>
+
+            </div>
+
+          }
+
+        </section>
+
+      }
+
+    </div>
+
+
+    <!-- ========================================
+         FINISH WORKOUT
+    ========================================= -->
+
+    <button
+      type="button"
+      class="finish-button"
+      [disabled]="
+        completedSets() === 0
+      "
+      (click)="finishWorkout()"
+    >
+
+      @if (
+        completedSets() ===
+        totalSets()
+      ) {
+
+        Finish workout
+
+      } @else {
+
+        Finish workout early
+
+      }
+
+    </button>
+
+
+    <!-- ========================================
+         REST TIMER
+    ========================================= -->
+
+    @if (
+      restTimerActive()
+    ) {
+
+      <div class="rest-timer">
+
+        <div class="rest-timer-info">
+
+          <span>
+            REST TIMER
+          </span>
+
+          <strong>
+            {{
+              formatRestTime(
+                restSecondsRemaining()
+              )
+            }}
+          </strong>
+
+          <small>
+            {{ restExerciseName() }}
+          </small>
+
+        </div>
+
+
+        <div class="rest-timer-actions">
+
+          <button
+            type="button"
+            class="
+              rest-action
+              rest-action-add
+            "
+            (click)="
+              addRestTime(30)
+            "
+          >
+
+            <span class="rest-action-icon">
+              +
+            </span>
+
+            <span>
+              30s
+            </span>
+
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              rest-action
+              rest-action-skip
+            "
+            (click)="
+              skipRestTimer()
+            "
+          >
+
+            <span>
+              Skip
+            </span>
+
+            <span class="rest-action-arrow">
+              →
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    }
+
+
+    <!-- ========================================
+         REST COMPLETE
+    ========================================= -->
+
+    @if (
+      restComplete()
+    ) {
+
+      <div class="rest-complete">
+
+        <div class="rest-complete-icon">
+          ✓
+        </div>
+
+        <div>
+
+          <strong>
+            REST COMPLETE
+          </strong>
+
+          <span>
+            Start your next set
+          </span>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+}

@@ -1,0 +1,765 @@
+<div class="nutrition-page">
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <header class="page-header">
+    <div>
+      <span class="eyebrow">DAILY TRACKING</span>
+      <h1>Nutrition</h1>
+      <p>Track today's calories and macros.</p>
+    </div>
+  </header>
+
+
+  <!-- ========================================
+       CALORIES
+  ========================================= -->
+
+  <section class="calorie-card">
+
+    <div class="calorie-header">
+
+      <div>
+        <span class="label">
+          CALORIES
+        </span>
+
+        <div class="calorie-value">
+          <strong>
+            {{ calories() ?? 0 }}
+          </strong>
+
+          <span>
+            / {{ calorieTarget }} kcal
+          </span>
+        </div>
+      </div>
+
+
+      <div class="remaining">
+        <strong>
+          {{ caloriesRemaining }}
+        </strong>
+
+        <span>
+          remaining
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="progress-track">
+      <div
+        class="progress-fill"
+        [style.width.%]="calorieProgress"
+      ></div>
+    </div>
+
+
+    <div class="input-group">
+
+      <label for="calories">
+        Calories eaten
+      </label>
+
+      <div class="input-wrapper">
+
+        <input
+          id="calories"
+          type="number"
+          min="0"
+          inputmode="numeric"
+          placeholder="2000"
+          [ngModel]="calories()"
+          (ngModelChange)="calories.set($event)"
+        />
+
+        <span>
+          kcal
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       MACROS
+  ========================================= -->
+
+  <section class="macro-section">
+
+    <div class="section-title">
+      <div>
+        <span class="eyebrow">
+          MACROS
+        </span>
+
+        <h2>
+          Today's macros
+        </h2>
+      </div>
+    </div>
+
+
+    <!-- PROTEIN -->
+
+    <div class="macro-card">
+
+      <div class="macro-header">
+
+        <div>
+          <span class="macro-name">
+            Protein
+          </span>
+
+          <strong>
+            {{ protein() ?? 0 }}
+
+            <small>
+              / {{ proteinTarget }} g
+            </small>
+          </strong>
+        </div>
+
+
+        <span class="macro-remaining">
+          {{ proteinRemaining }}g left
+        </span>
+
+      </div>
+
+
+      <div class="progress-track small">
+        <div
+          class="progress-fill"
+          [style.width.%]="proteinProgress"
+        ></div>
+      </div>
+
+
+      <div class="input-wrapper compact">
+
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          placeholder="164"
+          [ngModel]="protein()"
+          (ngModelChange)="protein.set($event)"
+        />
+
+        <span>
+          g
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- CARBS -->
+
+    <div class="macro-card">
+
+      <div class="macro-header">
+
+        <div>
+          <span class="macro-name">
+            Carbs
+          </span>
+
+          <strong>
+            {{ carbs() ?? 0 }}
+
+            <small>
+              / {{ carbsTarget }} g
+            </small>
+          </strong>
+        </div>
+
+
+        <span class="macro-remaining">
+          {{ carbsRemaining }}g left
+        </span>
+
+      </div>
+
+
+      <div class="progress-track small">
+        <div
+          class="progress-fill"
+          [style.width.%]="carbsProgress"
+        ></div>
+      </div>
+
+
+      <div class="input-wrapper compact">
+
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          placeholder="200"
+          [ngModel]="carbs()"
+          (ngModelChange)="carbs.set($event)"
+        />
+
+        <span>
+          g
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- FAT -->
+
+    <div class="macro-card">
+
+      <div class="macro-header">
+
+        <div>
+          <span class="macro-name">
+            Fat
+          </span>
+
+          <strong>
+            {{ fat() ?? 0 }}
+
+            <small>
+              / {{ fatTarget }} g
+            </small>
+          </strong>
+        </div>
+
+
+        <span class="macro-remaining">
+          {{ fatRemaining }}g left
+        </span>
+
+      </div>
+
+
+      <div class="progress-track small">
+        <div
+          class="progress-fill"
+          [style.width.%]="fatProgress"
+        ></div>
+      </div>
+
+
+      <div class="input-wrapper compact">
+
+        <input
+          type="number"
+          min="0"
+          inputmode="numeric"
+          placeholder="60"
+          [ngModel]="fat()"
+          (ngModelChange)="fat.set($event)"
+        />
+
+        <span>
+          g
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       SAVE
+  ========================================= -->
+
+  <button
+    type="button"
+    class="save-button"
+    (click)="save()"
+  >
+    Save today
+  </button>
+
+
+  <!-- ========================================
+       TODAY'S ENERGY BALANCE
+  ========================================= -->
+
+  @if (energyBalance; as balance) {
+
+    <section class="energy-card">
+
+      <div class="energy-title">
+
+        <div>
+          <span class="eyebrow">
+            ENERGY BALANCE
+          </span>
+
+          <h2>
+            Today's estimate
+          </h2>
+        </div>
+
+
+        <span class="energy-weight">
+          {{ balance.weightKg }} kg
+        </span>
+
+      </div>
+
+
+      <div class="energy-breakdown">
+
+        <div class="energy-row">
+
+          <span>
+            Base expenditure
+          </span>
+
+          <strong>
+            {{ balance.baseExpenditure }}
+            kcal
+          </strong>
+
+        </div>
+
+
+        <div class="energy-row">
+
+          <span>
+            Running
+          </span>
+
+          <strong>
+            +{{ balance.runningCalories }}
+            kcal
+          </strong>
+
+        </div>
+
+
+        <div class="energy-row">
+
+          <span>
+            Workout
+          </span>
+
+          <strong>
+            +{{ balance.workoutCalories }}
+            kcal
+          </strong>
+
+        </div>
+
+
+        <div class="energy-row total">
+
+          <span>
+            Estimated burn
+          </span>
+
+          <strong>
+            {{ balance.totalExpenditure }}
+            kcal
+          </strong>
+
+        </div>
+
+
+        <div class="energy-row food">
+
+          <span>
+            Food
+          </span>
+
+          <strong>
+            -{{ balance.caloriesEaten }}
+            kcal
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- DAILY DEFICIT / SURPLUS -->
+
+      <div
+        class="deficit-result"
+        [class.surplus]="balance.deficit < 0"
+      >
+
+        @if (balance.deficit > 0) {
+
+          <span>
+            ESTIMATED DEFICIT
+          </span>
+
+          <strong>
+            -{{ balance.deficit }}
+            kcal
+          </strong>
+
+        } @else if (balance.deficit < 0) {
+
+          <span>
+            ESTIMATED SURPLUS
+          </span>
+
+          <strong>
+            +{{ -balance.deficit }}
+            kcal
+          </strong>
+
+        } @else {
+
+          <span>
+            ENERGY BALANCE
+          </span>
+
+          <strong>
+            Maintenance
+          </strong>
+
+        }
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- ========================================
+       7-DAY ENERGY TREND
+  ========================================= -->
+
+  @if (sevenDayTrend; as trend) {
+
+    <section class="trend-card">
+
+      <div class="trend-header">
+
+        <div>
+
+          <span class="eyebrow">
+            7-DAY ENERGY TREND
+          </span>
+
+          <h2>
+            Weekly estimate
+          </h2>
+
+          <small>
+            Based on {{ trend.daysLogged }}
+
+            @if (trend.daysLogged === 1) {
+              logged day
+            } @else {
+              logged days
+            }
+          </small>
+
+        </div>
+
+
+        <div class="trend-days">
+          {{ trend.daysLogged }}/7
+        </div>
+
+      </div>
+
+
+      <!-- AVERAGES -->
+
+      <div class="trend-stats">
+
+        <div class="trend-stat">
+
+          <span>
+            Avg food
+          </span>
+
+          <strong>
+            {{ trend.averageCaloriesEaten }}
+          </strong>
+
+          <small>
+            kcal / day
+          </small>
+
+        </div>
+
+
+        <div class="trend-stat">
+
+          <span>
+            Avg burn
+          </span>
+
+          <strong>
+            {{ trend.averageExpenditure }}
+          </strong>
+
+          <small>
+            kcal / day
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- WEEKLY DEFICIT -->
+
+      <div
+        class="weekly-deficit"
+        [class.surplus]="trend.averageDeficit < 0"
+      >
+
+        <div>
+
+          <span>
+            @if (trend.averageDeficit >= 0) {
+              AVG DAILY DEFICIT
+            } @else {
+              AVG DAILY SURPLUS
+            }
+          </span>
+
+
+          <strong>
+
+            @if (trend.averageDeficit >= 0) {
+
+              -{{ trend.averageDeficit }}
+
+            } @else {
+
+              +{{ -trend.averageDeficit }}
+
+            }
+
+            <small>
+              kcal
+            </small>
+
+          </strong>
+
+        </div>
+
+
+        <div class="weekly-projection">
+
+          <span>
+            7-day projection
+          </span>
+
+          <strong>
+
+            @if (trend.averageDeficit >= 0) {
+
+              -{{ trend.averageDeficit * 7 }}
+
+            } @else {
+
+              +{{ -trend.averageDeficit * 7 }}
+
+            }
+
+            kcal
+
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- ESTIMATED LOSS RATE -->
+
+      @if (trend.estimatedKgLossPerWeek > 0) {
+
+        <div class="loss-rate">
+
+          <div class="loss-rate-main">
+
+            <span>
+              ESTIMATED LOSS RATE
+            </span>
+
+
+            <strong>
+              ~{{
+                trend
+                  .estimatedKgLossPerWeek
+                  .toFixed(2)
+              }}
+              kg
+
+              <small>
+                / week
+              </small>
+            </strong>
+
+          </div>
+
+
+          <span class="loss-rate-note">
+            Based on your current logged average
+          </span>
+
+        </div>
+
+      }
+
+
+      <!-- GOAL PROJECTION -->
+
+      <div class="goal-projection">
+
+        <div class="goal-weight-row">
+
+          <div>
+
+            <span>
+              Current
+            </span>
+
+            <strong>
+              {{ trend.currentWeight }}
+              kg
+            </strong>
+
+          </div>
+
+
+          <div class="goal-arrow">
+            →
+          </div>
+
+
+          <div>
+
+            <span>
+              Goal
+            </span>
+
+            <strong>
+              {{ trend.goalWeight }}
+              kg
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="goal-progress-info">
+
+          <span>
+            {{ trend.weightRemaining.toFixed(1) }}
+            kg remaining
+          </span>
+
+
+          @if (
+            trend.estimatedWeeksToGoal !== null
+          ) {
+
+            <strong>
+              ~{{
+                trend
+                  .estimatedWeeksToGoal
+                  .toFixed(0)
+              }}
+              weeks
+            </strong>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <p class="estimate-disclaimer">
+        Estimates are based on logged intake and
+        estimated energy expenditure. Actual body
+        weight can fluctuate.
+      </p>
+
+    </section>
+
+  }
+
+
+  <!-- ========================================
+       NUTRITION WEEKLY AVERAGE
+  ========================================= -->
+
+  @if (
+    nutritionService.averageCalories7Days() > 0
+  ) {
+
+    <section class="weekly-card">
+
+      <span class="eyebrow">
+        LAST 7 DAYS
+      </span>
+
+      <h2>
+        Nutrition average
+      </h2>
+
+
+      <div class="weekly-stats">
+
+        <div>
+
+          <strong>
+            {{
+              nutritionService
+                .averageCalories7Days()
+            }}
+          </strong>
+
+          <span>
+            kcal / day
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            {{
+              nutritionService
+                .averageProtein7Days()
+            }}g
+          </strong>
+
+          <span>
+            protein / day
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

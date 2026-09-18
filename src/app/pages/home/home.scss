@@ -1,0 +1,533 @@
+:host {
+    display: block;
+}
+
+
+/* ========================================
+   PAGE
+======================================== */
+
+.home-page {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+
+    padding:
+        24px
+        16px
+        110px;
+}
+
+
+/* ========================================
+   COMMON
+======================================== */
+
+.eyebrow {
+    display: block;
+
+    color: #0f5e6e;
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.9px;
+}
+
+.home-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 22px;
+
+    h1 {
+        margin: 3px 0 2px;
+
+        color: #0f172a;
+
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1.1;
+    }
+
+    p {
+        margin: 0;
+
+        color: #94a3b8;
+
+        font-size: 10px;
+        font-weight: 600;
+    }
+}
+
+
+/* ========================================
+   WEIGHT BADGE
+======================================== */
+
+.weight-badge {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: baseline;
+    column-gap: 3px;
+
+    min-width: 68px;
+    padding: 9px 11px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+
+    background: #fff;
+
+    span {
+        grid-column: 1 / -1;
+
+        margin-bottom: 2px;
+
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 900;
+        letter-spacing: 0.6px;
+    }
+
+    strong {
+        color: #0f172a;
+
+        font-size: 19px;
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    small {
+        color: #64748b;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+}
+
+
+/* ========================================
+   ENERGY BALANCE
+======================================== */
+
+.balance-card {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 17px;
+
+    border: 1px solid
+        rgba(15, 94, 110, 0.12);
+
+    border-radius: 16px;
+
+    background:
+        rgba(15, 94, 110, 0.07);
+
+    .card-label {
+        display: block;
+
+        color: #0f5e6e;
+
+        font-size: 8px;
+        font-weight: 900;
+        letter-spacing: 0.7px;
+    }
+
+    > div:first-child > strong {
+        display: block;
+
+        margin-top: 3px;
+
+        color: #0f5e6e;
+
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1;
+
+        font-variant-numeric: tabular-nums;
+
+        small {
+            font-size: 9px;
+            font-weight: 700;
+        }
+    }
+
+    &.surplus {
+        border-color:
+            rgba(234, 88, 12, 0.12);
+
+        background:
+            rgba(234, 88, 12, 0.07);
+
+        .card-label,
+        > div:first-child > strong {
+            color: #c2410c;
+        }
+    }
+
+    &.empty {
+        align-items: center;
+
+        border-color: #e2e8f0;
+
+        background: #f8fafc;
+
+        .card-label {
+            color: #64748b;
+        }
+
+        > div:first-child > strong {
+            color: #94a3b8;
+        }
+
+        p {
+            max-width: 190px;
+            margin: 0;
+
+            color: #94a3b8;
+
+            text-align: right;
+
+            font-size: 8px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    }
+}
+
+.balance-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding-bottom: 2px;
+
+    color: #64748b;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    .dot {
+        color: #cbd5e1;
+    }
+}
+
+
+/* ========================================
+   SECTIONS
+======================================== */
+
+.dashboard-section {
+    margin-top: 24px;
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    h2 {
+        margin: 2px 0 0;
+
+        color: #0f172a;
+
+        font-size: 16px;
+        font-weight: 900;
+    }
+}
+
+
+/* ========================================
+   NUTRITION
+======================================== */
+
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.metric-card {
+    min-width: 0;
+    padding: 13px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+
+    background: #fff;
+
+    > small {
+        display: block;
+
+        margin-top: 5px;
+
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 600;
+    }
+}
+
+.metric-label {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.metric-value {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+
+    margin-top: 4px;
+
+    strong {
+        color: #0f172a;
+
+        font-size: 20px;
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    span {
+        color: #94a3b8;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+}
+
+
+/* ========================================
+   PROGRESS
+======================================== */
+
+.progress-track {
+    width: 100%;
+    height: 5px;
+
+    margin-top: 9px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e2e8f0;
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #0f5e6e;
+
+    transition: width 250ms ease;
+}
+
+
+/* ========================================
+   ACTIVITY
+======================================== */
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.activity-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+    padding: 13px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+
+    background: #fff;
+
+    > div:last-child {
+        min-width: 0;
+
+        span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        strong {
+            display: block;
+
+            margin-top: 2px;
+
+            overflow: hidden;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    &.completed {
+        border-color:
+            rgba(15, 94, 110, 0.15);
+
+        background:
+            rgba(15, 94, 110, 0.04);
+
+        .activity-icon {
+            background: #0f5e6e;
+            color: #fff;
+        }
+
+        > div:last-child strong {
+            color: #0f172a;
+        }
+    }
+}
+
+.activity-icon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 900;
+}
+
+
+/* ========================================
+   BODY WEIGHT
+======================================== */
+
+.weight-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-top: 24px;
+    padding: 16px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+
+    background: #fff;
+
+    h2 {
+        margin: 3px 0 0;
+
+        color: #0f172a;
+
+        font-size: 21px;
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    p {
+        margin: 2px 0 0;
+
+        color: #94a3b8;
+
+        font-size: 8px;
+        font-weight: 600;
+    }
+}
+
+.weight-progress {
+    text-align: right;
+
+    strong {
+        display: block;
+
+        color: #0f5e6e;
+
+        font-size: 16px;
+        font-weight: 900;
+
+        font-variant-numeric: tabular-nums;
+    }
+
+    span {
+        display: block;
+
+        margin-top: 1px;
+
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 700;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 380px) {
+
+    .home-page {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .home-header h1 {
+        font-size: 25px;
+    }
+
+    .balance-card {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .balance-info {
+        padding-bottom: 0;
+    }
+
+    .nutrition-grid,
+    .activity-grid {
+        gap: 7px;
+    }
+
+    .metric-card,
+    .activity-card {
+        padding: 11px;
+    }
+}

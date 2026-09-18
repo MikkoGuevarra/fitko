@@ -1,0 +1,268 @@
+<div class="workout-page">
+
+  <!-- HEADER -->
+
+  <header class="header">
+    <p>TRAINING</p>
+
+    <h1>Workout</h1>
+
+    <span>
+      Choose today's session.
+    </span>
+  </header>
+
+
+  <!-- ACTIVE WORKOUT -->
+
+  @if (activeDraft; as draft) {
+
+    @if (activeDraftWorkout; as draftWorkout) {
+
+      <section class="active-workout">
+
+        <div class="active-workout-top">
+
+          <div class="active-workout-icon">
+            ●
+          </div>
+
+          <div class="active-workout-info">
+
+            <span>
+              WORKOUT IN PROGRESS
+            </span>
+
+            <strong>
+              {{ draftWorkout.name }}
+            </strong>
+
+            <small>
+              {{ workoutService.getDraftCompletedSets() }}
+              /
+              {{ workoutService.getDraftTotalSets() }}
+              sets completed
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIVE WORKOUT PROGRESS -->
+
+        <div class="active-workout-progress">
+
+          <div
+            class="active-workout-progress-value"
+            [style.width.%]="
+              workoutService.getDraftTotalSets()
+                ? (
+                    workoutService.getDraftCompletedSets()
+                    /
+                    workoutService.getDraftTotalSets()
+                  ) * 100
+                : 0
+            "
+          ></div>
+
+        </div>
+
+
+        <!-- ACTIVE WORKOUT ACTIONS -->
+
+        <div class="active-workout-actions">
+
+          <button
+            type="button"
+            class="resume-button"
+            (click)="resumeWorkout()"
+          >
+            Resume workout
+          </button>
+
+          <button
+            type="button"
+            class="discard-button"
+            (click)="discardWorkout()"
+          >
+            Discard
+          </button>
+
+        </div>
+
+      </section>
+
+    }
+
+  }
+
+
+  <!-- WORKOUT LIST -->
+
+  <div class="workout-list">
+
+    @for (workout of workouts; track workout.id) {
+
+      <a
+        class="workout-card"
+        [routerLink]="
+          activeDraft &&
+          activeDraft.workoutType !== workout.id
+            ? null
+            : ['/workout', workout.id]
+        "
+        [class.disabled]="
+          activeDraft &&
+          activeDraft.workoutType !== workout.id
+        "
+      >
+
+        <div class="day">
+          {{ workout.label }}
+        </div>
+
+
+        <div class="info">
+
+          <strong>
+            {{ workout.name }}
+          </strong>
+
+          <span>
+            {{ workout.exercises.length }}
+            exercises
+          </span>
+
+        </div>
+
+
+        <div class="arrow">
+
+          @if (
+            activeDraft &&
+            activeDraft.workoutType === workout.id
+          ) {
+            Resume →
+          } @else {
+            →
+          }
+
+        </div>
+
+      </a>
+
+    }
+
+  </div>
+
+
+  <!-- WORKOUT HISTORY -->
+
+  <section class="history">
+
+    <div class="history-header">
+
+      <h2>
+        Workout history
+      </h2>
+
+      <span>
+        {{ workoutService.totalWorkouts() }}
+        workouts
+      </span>
+
+    </div>
+
+
+    <div class="history-list">
+
+      @for (
+        session of workoutService.sessions();
+        track session.id
+      ) {
+
+        <a
+          class="history-card"
+          [routerLink]="[
+            '/workout/history',
+            session.id
+          ]"
+        >
+
+          <!-- DATE -->
+
+          <div class="history-date">
+
+            <strong>
+              {{ session.date | date: "dd" }}
+            </strong>
+
+            <span>
+              {{ session.date | date: "MMM" }}
+            </span>
+
+          </div>
+
+
+          <!-- INFO -->
+
+          <div class="history-info">
+
+            <strong>
+              {{ session.workoutName }}
+            </strong>
+
+            <span>
+              {{ session.durationMinutes }} min ·
+              {{ session.exercises.length }}
+              exercises
+            </span>
+
+            <small>
+              {{
+                session.totalVolume
+                  | number: "1.0-0"
+              }}
+              kg volume
+            </small>
+
+          </div>
+
+
+          <!-- ARROW -->
+
+          <div class="history-arrow">
+            →
+          </div>
+
+        </a>
+
+      } @empty {
+
+        <!-- EMPTY HISTORY -->
+
+        <div class="empty-history">
+
+          <span class="empty-icon">
+            🏋️
+          </span>
+
+          <strong>
+            No workouts yet
+          </strong>
+
+          <span>
+            Complete your first workout
+            to see it here.
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+</div>

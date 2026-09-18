@@ -1,0 +1,1229 @@
+<div class="progress-page">
+
+  <!-- HEADER -->
+
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">YOUR JOURNEY</p>
+
+      <h1>Progress</h1>
+
+      <p>Track your fitness journey.</p>
+    </div>
+
+    <button
+      type="button"
+      class="add-button"
+      (click)="openAddWeight()"
+    >
+      + Add weight
+    </button>
+  </header>
+
+
+  <!-- WEIGHT HERO -->
+
+  <section class="weight-hero">
+
+    <div>
+      <span class="hero-label">
+        CURRENT WEIGHT
+      </span>
+
+      <div class="hero-weight">
+        {{ fitness.currentWeight().toFixed(1) }}
+
+        <small>
+          kg
+        </small>
+      </div>
+
+      <span class="hero-lost">
+        ↓
+        {{ fitness.weightLost().toFixed(1) }}
+        kg lost
+      </span>
+    </div>
+
+
+    <div class="hero-goal">
+      <span>
+        GOAL
+      </span>
+
+      <strong>
+        {{ fitness.goalWeight.toFixed(1) }}
+      </strong>
+
+      <small>
+        kg
+      </small>
+    </div>
+
+  </section>
+
+
+  <!-- THIS WEEK -->
+
+  <section class="section">
+
+    <h2>
+      This week
+    </h2>
+
+
+    <div class="week-grid">
+
+      <div class="week-card">
+
+        <span class="week-icon">
+          🏋️
+        </span>
+
+        <strong>
+          {{ workoutService.workoutsThisWeek() }}
+          /
+          {{ fitness.weeklyWorkoutGoal() }}
+        </strong>
+
+        <span>
+          Workouts
+        </span>
+
+      </div>
+
+
+      <div class="week-card">
+
+        <span class="week-icon">
+          🏃
+        </span>
+
+        <strong>
+          {{ runningService.kmThisWeek() | number: "1.0-1" }}
+          /
+          {{ fitness.weeklyRunningGoal() }}
+        </strong>
+
+        <span>
+          Running km
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WEIGHT TREND -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <h2>
+        Weight trend
+      </h2>
+
+      <span>
+        {{ fitness.weightEntries().length }}
+        entries
+      </span>
+
+    </div>
+
+
+    <div class="chart-card">
+
+      @if (chartEntries().length > 1) {
+
+        <svg
+          class="weight-chart"
+          viewBox="0 0 320 140"
+          preserveAspectRatio="none"
+        >
+
+          <!-- GRID -->
+
+          <line
+            x1="10"
+            y1="20"
+            x2="310"
+            y2="20"
+            class="grid-line"
+          />
+
+          <line
+            x1="10"
+            y1="70"
+            x2="310"
+            y2="70"
+            class="grid-line"
+          />
+
+          <line
+            x1="10"
+            y1="120"
+            x2="310"
+            y2="120"
+            class="grid-line"
+          />
+
+
+          <!-- WEIGHT LINE -->
+
+          <polyline
+            [attr.points]="chartPoints()"
+            class="weight-line"
+          />
+
+        </svg>
+
+
+        <div class="chart-footer">
+
+          <span>
+            {{
+              chartEntries()[0].date
+                | date: "dd MMM"
+            }}
+          </span>
+
+          <span>
+            {{
+              chartEntries()[
+                chartEntries().length - 1
+              ].date
+                | date: "dd MMM"
+            }}
+          </span>
+
+        </div>
+
+      } @else {
+
+        <div class="chart-empty">
+
+          <strong>
+            Not enough data yet
+          </strong>
+
+          <span>
+            Add another weight to see your trend.
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- ALL TIME -->
+
+  <section class="section">
+
+    <h2>
+      All time
+    </h2>
+
+
+    <div class="stats-grid">
+
+      <!-- WORKOUTS -->
+
+      <div class="stat-card">
+
+        <span>
+          🏋️
+        </span>
+
+        <div>
+
+          <strong>
+            {{ workoutService.totalWorkouts() }}
+          </strong>
+
+          <small>
+            Workouts
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- VOLUME -->
+
+      <div class="stat-card">
+
+        <span>
+          💪
+        </span>
+
+        <div>
+
+          <strong>
+            {{
+              workoutService.totalVolume()
+                | number: "1.0-0"
+            }}
+          </strong>
+
+          <small>
+            kg volume
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- RUNS -->
+
+      <div class="stat-card">
+
+        <span>
+          🏃
+        </span>
+
+        <div>
+
+          <strong>
+            {{ runningService.totalRuns() }}
+          </strong>
+
+          <small>
+            Runs
+          </small>
+
+        </div>
+
+      </div>
+
+
+      <!-- RUNNING DISTANCE -->
+
+      <div class="stat-card">
+
+        <span>
+          📍
+        </span>
+
+        <div>
+
+          <strong>
+            {{
+              runningService.totalDistance()
+                | number: "1.0-1"
+            }}
+          </strong>
+
+          <small>
+            km running
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ========================================
+       STRENGTH CHART / ESTIMATED 1RM
+  ========================================= -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <h2>
+        Strength trend
+      </h2>
+
+      <span>
+        Estimated 1RM
+      </span>
+
+    </div>
+
+
+    @if (trackedExercises().length) {
+
+      <!-- EXERCISE SELECTOR -->
+
+      <div class="exercise-selector">
+
+        <label>
+          Exercise
+        </label>
+
+        <select
+          [ngModel]="selectedExercise()?.id"
+          (ngModelChange)="selectExercise($event)"
+        >
+
+          @for (
+            exercise of trackedExercises();
+            track exercise.id
+          ) {
+
+            <option [value]="exercise.id">
+              {{ exercise.name }}
+            </option>
+
+          }
+
+        </select>
+
+      </div>
+
+
+      @if (selectedExercise(); as selected) {
+
+        <div class="strength-chart-card">
+
+
+          <!-- CURRENT VALUE -->
+
+          <div class="strength-chart-summary">
+
+            <div>
+
+              <span>
+                CURRENT EST. 1RM
+              </span>
+
+
+              @if (
+                currentEstimated1RM();
+                as current
+              ) {
+
+                <strong>
+                  {{
+                    current
+                      | number: "1.1-1"
+                  }}
+                  <small>
+                    kg
+                  </small>
+                </strong>
+
+              }
+
+            </div>
+
+
+            <div class="strength-change">
+
+              @if (
+                estimated1RMImprovement() > 0
+              ) {
+
+                <strong class="positive">
+                  ↑
+                  {{
+                    estimated1RMImprovement()
+                      | number: "1.1-1"
+                  }}
+                  kg
+                </strong>
+
+              } @else if (
+                estimated1RMImprovement() < 0
+              ) {
+
+                <strong class="negative">
+                  ↓
+                  {{
+                    -estimated1RMImprovement()
+                      | number: "1.1-1"
+                  }}
+                  kg
+                </strong>
+
+              } @else {
+
+                <strong class="neutral">
+                  —
+                </strong>
+
+              }
+
+              <span>
+                since first workout
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- CHART -->
+
+          @if (
+            strengthChartData().length > 1
+          ) {
+
+            <svg
+              class="strength-chart"
+              viewBox="0 0 320 140"
+              preserveAspectRatio="none"
+            >
+
+              <!-- GRID -->
+
+              <line
+                x1="10"
+                y1="20"
+                x2="310"
+                y2="20"
+                class="grid-line"
+              />
+
+              <line
+                x1="10"
+                y1="70"
+                x2="310"
+                y2="70"
+                class="grid-line"
+              />
+
+              <line
+                x1="10"
+                y1="120"
+                x2="310"
+                y2="120"
+                class="grid-line"
+              />
+
+
+              <!-- STRENGTH LINE -->
+
+              <polyline
+                [attr.points]="strengthChartPoints()"
+                class="strength-line"
+              />
+
+            </svg>
+
+
+            <div class="chart-footer">
+
+              <span>
+                {{
+                  strengthChartData()[0].date
+                    | date: "dd MMM"
+                }}
+              </span>
+
+              <span>
+                {{
+                  strengthChartData()[
+                    strengthChartData().length - 1
+                  ].date
+                    | date: "dd MMM"
+                }}
+              </span>
+
+            </div>
+
+          } @else {
+
+            <div class="chart-empty">
+
+              <strong>
+                First strength entry
+              </strong>
+
+              <span>
+                Complete this exercise again to see the trend.
+              </span>
+
+            </div>
+
+          }
+
+
+          <!-- STRENGTH DETAILS -->
+
+          <div class="strength-chart-details">
+
+            <div>
+
+              <span>
+                BEST EST. 1RM
+              </span>
+
+              @if (
+                bestEstimated1RM();
+                as best
+              ) {
+
+                <strong>
+                  {{
+                    best
+                      | number: "1.1-1"
+                  }}
+                  kg
+                </strong>
+
+              } @else {
+
+                <strong>
+                  —
+                </strong>
+
+              }
+
+            </div>
+
+
+            <div>
+
+              <span>
+                WORKOUTS
+              </span>
+
+              <strong>
+                {{ strengthChartData().length }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      }
+
+    } @else {
+
+      <div class="strength-empty">
+
+        <span>
+          📈
+        </span>
+
+        <strong>
+          No strength trend yet
+        </strong>
+
+        <small>
+          Complete workouts to start tracking your estimated 1RM.
+        </small>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- ========================================
+       STRENGTH PROGRESS / HEAVIEST WEIGHT PR
+  ========================================= -->
+
+  <section class="section">
+
+    <div class="section-header">
+
+      <h2>
+        Strength progress
+      </h2>
+
+      <span>
+        Personal records
+      </span>
+
+    </div>
+
+
+    <div class="strength-list">
+
+      @for (
+        exercise of workoutService.getStrengthProgress();
+        track exercise.exerciseId
+      ) {
+
+        <div class="strength-card">
+
+          <div class="strength-icon">
+            🏆
+          </div>
+
+
+          <div class="strength-info">
+
+            <strong>
+              {{ exercise.exerciseName }}
+            </strong>
+
+            <div class="strength-start">
+              Started
+              {{ exercise.firstWeight }}
+              kg
+            </div>
+
+          </div>
+
+
+          <div class="strength-pr">
+
+            <strong>
+              {{ exercise.currentPR }}
+              kg
+            </strong>
+
+
+            @if (exercise.improvement > 0) {
+
+              <span class="improvement">
+                ↑
+                {{ exercise.improvement }}
+                kg
+              </span>
+
+            } @else {
+
+              <span>
+                Current PR
+              </span>
+
+            }
+
+          </div>
+
+        </div>
+
+      } @empty {
+
+        <div class="strength-empty">
+
+          <span>
+            🏆
+          </span>
+
+          <strong>
+            No strength data yet
+          </strong>
+
+          <small>
+            Complete workouts to track your PRs.
+          </small>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- WEIGHT HISTORY -->
+
+  <section class="section history">
+
+    <div class="section-header">
+
+      <h2>
+        Weight history
+      </h2>
+
+      <span>
+        Latest first
+      </span>
+
+    </div>
+
+
+    <div class="history-list">
+
+      @for (
+        entry of fitness.weightEntries();
+        track entry.id
+      ) {
+
+        <div class="weight-entry">
+
+          <div class="entry-date">
+
+            <strong>
+              {{
+                entry.date
+                  | date: "dd MMM"
+              }}
+            </strong>
+
+            <span>
+              {{
+                entry.date
+                  | date: "yyyy"
+              }}
+            </span>
+
+          </div>
+
+
+          <div class="entry-weight">
+
+            {{ entry.weight.toFixed(1) }}
+
+            <small>
+              kg
+            </small>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="delete-button"
+            (click)="deleteWeight(entry.id)"
+            aria-label="Delete weight"
+          >
+            ×
+          </button>
+
+        </div>
+
+      } @empty {
+
+        <div class="empty-history">
+
+          <strong>
+            No weight entries yet
+          </strong>
+
+          <span>
+            Add your first weight to start tracking.
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+<!-- ========================================
+     RUNNING TREND
+======================================== -->
+
+<section class="section">
+
+  <div class="section-header">
+
+    <h2>
+      Running trend
+    </h2>
+
+    <span>
+      Pace progress
+    </span>
+
+  </div>
+
+
+  @if (runningChartData().length) {
+
+    <div class="running-chart-card">
+
+
+      <!-- CURRENT PACE -->
+
+      <div class="running-summary">
+
+        <div>
+
+          <span>
+            CURRENT PACE
+          </span>
+
+
+          <strong>
+            {{
+              runningService.formatPace(
+                runningChartData()[
+                  runningChartData().length - 1
+                ].averagePace
+              )
+            }}
+
+            <small>
+              /km
+            </small>
+          </strong>
+
+        </div>
+
+
+        <!-- IMPROVEMENT -->
+
+        <div class="running-change">
+
+          @if (
+            runningService.paceImprovement() > 0
+          ) {
+
+            <strong class="positive">
+              ↑
+              {{
+                formatPaceDifference(
+                  runningService.paceImprovement()
+                )
+              }}
+              /km
+            </strong>
+
+            <span>
+              faster
+            </span>
+
+          } @else if (
+            runningService.paceImprovement() < 0
+          ) {
+
+            <strong class="negative">
+              ↓
+              {{
+                formatPaceDifference(
+                  runningService.paceImprovement()
+                )
+              }}
+              /km
+            </strong>
+
+            <span>
+              slower
+            </span>
+
+          } @else {
+
+            <strong class="neutral">
+              —
+            </strong>
+
+            <span>
+              since first run
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+
+      <!-- ========================================
+           PACE GRAPH
+      ========================================= -->
+
+      @if (
+        runningChartData().length > 1
+      ) {
+
+        <svg
+          class="running-chart"
+          viewBox="0 0 320 140"
+          preserveAspectRatio="none"
+        >
+
+          <!-- GRID -->
+
+          <line
+            x1="10"
+            y1="20"
+            x2="310"
+            y2="20"
+            class="grid-line"
+          />
+
+          <line
+            x1="10"
+            y1="70"
+            x2="310"
+            y2="70"
+            class="grid-line"
+          />
+
+          <line
+            x1="10"
+            y1="120"
+            x2="310"
+            y2="120"
+            class="grid-line"
+          />
+
+
+          <!-- PACE LINE -->
+
+          <polyline
+            [attr.points]="runningChartPoints()"
+            class="running-line"
+          />
+
+        </svg>
+
+
+        <!-- DATES -->
+
+        <div class="chart-footer">
+
+          <span>
+            {{
+              runningChartData()[0].date
+                | date: "dd MMM"
+            }}
+          </span>
+
+          <span>
+            {{
+              runningChartData()[
+                runningChartData().length - 1
+              ].date
+                | date: "dd MMM"
+            }}
+          </span>
+
+        </div>
+
+      } @else {
+
+        <div class="chart-empty">
+
+          <strong>
+            First run recorded
+          </strong>
+
+          <span>
+            Add another run to see your pace trend.
+          </span>
+
+        </div>
+
+      }
+
+
+      <!-- ========================================
+           RUNNING STATS
+      ========================================= -->
+
+      <div class="running-details">
+
+
+        <!-- BEST PACE -->
+
+        <div>
+
+          <span>
+            BEST PACE
+          </span>
+
+
+          @if (
+            runningService.bestPace();
+            as bestPace
+          ) {
+
+            <strong>
+              {{
+                runningService.formatPace(
+                  bestPace
+                )
+              }}
+              /km
+            </strong>
+
+          } @else {
+
+            <strong>
+              —
+            </strong>
+
+          }
+
+        </div>
+
+
+        <!-- LONGEST RUN -->
+
+        <div>
+
+          <span>
+            LONGEST RUN
+          </span>
+
+          <strong>
+            {{
+              runningService.longestRun()
+                | number: "1.0-1"
+            }}
+            km
+          </strong>
+
+        </div>
+
+
+        <!-- AVERAGE PACE -->
+
+        <div>
+
+          <span>
+            AVG PACE
+          </span>
+
+
+          @if (
+            runningService.averagePace();
+            as averagePace
+          ) {
+
+            <strong>
+              {{
+                runningService.formatPace(
+                  averagePace
+                )
+              }}
+              /km
+            </strong>
+
+          } @else {
+
+            <strong>
+              —
+            </strong>
+
+          }
+
+        </div>
+
+
+        <!-- TOTAL RUNS -->
+
+        <div>
+
+          <span>
+            TOTAL RUNS
+          </span>
+
+          <strong>
+            {{
+              runningService.totalRuns()
+            }}
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  } @else {
+
+    <!-- EMPTY -->
+
+    <div class="running-empty">
+
+      <span>
+        🏃
+      </span>
+
+      <strong>
+        No running data yet
+      </strong>
+
+      <small>
+        Add your first run to start tracking your pace.
+      </small>
+
+    </div>
+
+  }
+
+</section>
+</div>
+
+
+<!-- ========================================
+     ADD WEIGHT MODAL
+======================================== -->
+
+@if (showAddWeight()) {
+
+  <div
+    class="modal-backdrop"
+    (click)="closeAddWeight()"
+  >
+
+    <div
+      class="modal"
+      (click)="$event.stopPropagation()"
+    >
+
+      <span class="modal-label">
+        TODAY'S WEIGHT
+      </span>
+
+      <h2>
+        Add weight
+      </h2>
+
+
+      <div class="weight-input">
+
+        <input
+          type="number"
+          inputmode="decimal"
+          step="0.1"
+          min="1"
+          [(ngModel)]="newWeight"
+          placeholder="85.0"
+          autofocus
+        />
+
+        <span>
+          kg
+        </span>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="cancel"
+          (click)="closeAddWeight()"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="button"
+          class="save"
+          [disabled]="
+            newWeight === null ||
+            newWeight <= 0
+          "
+          (click)="saveWeight()"
+        >
+          Save weight
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

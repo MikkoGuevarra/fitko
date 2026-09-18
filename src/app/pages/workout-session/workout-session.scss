@@ -1,0 +1,1140 @@
+:host {
+    display: block;
+}
+
+.session-page {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+    padding: 22px 16px 120px;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.session-header {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    margin-bottom: 20px;
+
+    .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+
+        flex-shrink: 0;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 11px;
+
+        background: #fff;
+        color: #0f172a;
+
+        font-size: 18px;
+        line-height: 1;
+
+        text-decoration: none;
+
+        transition:
+            background 120ms ease,
+            transform 120ms ease;
+
+        &:hover {
+            background: #f8fafc;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    .session-title {
+    flex: 1;
+    min-width: 0;
+}
+
+    span {
+        display: block;
+
+        margin-bottom: 3px;
+
+        color: #0f5e6e;
+
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    h1 {
+        margin: 0;
+
+        color: #0f172a;
+
+        font-size: 24px;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    p {
+        margin: 5px 0 0;
+
+        color: #64748b;
+
+        font-size: 10px;
+    }
+}
+
+
+/* ========================================
+   SESSION PROGRESS
+======================================== */
+
+.session-progress {
+    margin-bottom: 18px;
+    padding: 14px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    background: #fff;
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 9px;
+
+    span {
+        color: #64748b;
+
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+    strong {
+        color: #0f172a;
+
+        font-size: 10px;
+        font-weight: 800;
+    }
+}
+
+.progress-track {
+    overflow: hidden;
+
+    width: 100%;
+    height: 6px;
+
+    border-radius: 999px;
+
+    background: #e2e8f0;
+}
+
+.progress-value {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #0f5e6e;
+
+    transition: width 200ms ease;
+}
+
+
+/* ========================================
+   EXERCISE LIST
+======================================== */
+
+.exercise-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.exercise-card {
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+
+    background: #fff;
+
+    box-shadow:
+        0 1px 2px rgba(15, 23, 42, 0.03);
+}
+
+
+/* ========================================
+   EXERCISE HEADER
+======================================== */
+
+.exercise-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 14px;
+
+    padding: 15px 14px 13px;
+
+    > div:first-child {
+        min-width: 0;
+    }
+
+    h2 {
+        margin: 3px 0 0;
+
+        color: #0f172a;
+
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.25;
+    }
+}
+
+.exercise-number {
+    color: #94a3b8;
+
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+}
+
+
+/* ========================================
+   TARGET
+======================================== */
+
+.target {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+
+    strong {
+        color: #0f172a;
+
+        font-size: 10px;
+        font-weight: 800;
+    }
+
+    span {
+        margin-top: 3px;
+
+        color: #94a3b8;
+
+        font-size: 8px;
+    }
+}
+
+
+/* ========================================
+   CURRENT PR
+======================================== */
+
+.current-pr {
+    display: inline-flex;
+    align-items: center;
+
+    margin-top: 7px;
+    padding: 4px 7px;
+
+    border-radius: 7px;
+
+    background: #fff7ed;
+    color: #c2410c;
+
+    font-size: 8px;
+    font-weight: 800;
+}
+
+
+/* ========================================
+   SET HEADER
+======================================== */
+
+.set-header {
+    display: grid;
+    grid-template-columns:
+        42px
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        42px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 7px 14px;
+
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+
+    background: #f8fafc;
+
+    span {
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+        text-align: center;
+
+        &:first-child {
+            text-align: left;
+        }
+    }
+}
+
+
+/* ========================================
+   SET ROW
+======================================== */
+
+.set-row {
+    display: grid;
+    grid-template-columns:
+        42px
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        42px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    transition:
+        background 150ms ease,
+        border 150ms ease;
+
+    &:last-of-type {
+        border-bottom: 0;
+    }
+
+    &.completed {
+        background: #f0fdfa;
+    }
+
+    &.new-pr {
+        background: #fff7ed;
+    }
+
+    input {
+        width: 100%;
+        height: 38px;
+
+        padding: 0 8px;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 9px;
+
+        outline: none;
+
+        background: #f8fafc;
+        color: #0f172a;
+
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+
+        transition:
+            border-color 120ms ease,
+            background 120ms ease,
+            box-shadow 120ms ease;
+
+        &:focus {
+            border-color: #0f5e6e;
+
+            background: #fff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(15, 94, 110, 0.08);
+        }
+    }
+}
+
+.set-number {
+    display: flex;
+    align-items: center;
+
+    color: #64748b;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+/* ========================================
+   WORKOUT TIME
+======================================== */
+
+.workout-time {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+
+    padding: 7px 10px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    background: #fff;
+
+    > span {
+        margin: 0 0 2px;
+
+        color: #94a3b8;
+
+        font-size: 6px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+    }
+
+    > strong {
+        color: #0f5e6e;
+
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+    }
+}
+/* ========================================
+   COMPLETE SET BUTTON
+======================================== */
+
+.complete-set {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 50%;
+
+    background: #fff;
+    color: #94a3b8;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        background 120ms ease,
+        border-color 120ms ease,
+        color 120ms ease,
+        transform 120ms ease;
+
+    &:active {
+        transform: scale(0.9);
+    }
+
+    &.checked {
+        border-color: #0f5e6e;
+
+        background: #0f5e6e;
+        color: #fff;
+
+        font-size: 14px;
+        font-weight: 800;
+    }
+}
+
+
+/* ========================================
+   NEW PR
+======================================== */
+
+.new-pr-message {
+    margin: 0 14px 8px;
+    padding: 7px 10px;
+
+    border-radius: 9px;
+
+    background: #fff7ed;
+    color: #c2410c;
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+
+/* ========================================
+   LAST SESSION
+======================================== */
+
+.last-session {
+    padding: 11px 14px 13px;
+
+    border-top: 1px solid #f1f5f9;
+
+    background: #f8fafc;
+
+    > span {
+        display: block;
+
+        margin-bottom: 7px;
+
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+    }
+
+    p {
+        margin: 0;
+
+        color: #94a3b8;
+
+        font-size: 9px;
+    }
+}
+
+.last-sets {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    strong {
+        padding: 4px 6px;
+
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+
+        background: #fff;
+        color: #475569;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+}
+
+.progressive-hint {
+    margin: 8px 0 0 !important;
+
+    color: #0f5e6e !important;
+
+    font-size: 9px !important;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   FINISH WORKOUT
+======================================== */
+
+.finish-button {
+    width: 100%;
+    min-height: 50px;
+
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: #0f5e6e;
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 120ms ease,
+        transform 120ms ease,
+        opacity 120ms ease;
+
+    &:hover:not(:disabled) {
+        background: #0c4c59;
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.99);
+    }
+
+    &:disabled {
+        background: #cbd5e1;
+        color: #94a3b8;
+
+        cursor: not-allowed;
+
+        opacity: 0.7;
+    }
+}
+
+
+/* ========================================
+   REST TIMER
+======================================== */
+
+.rest-timer {
+    position: fixed;
+
+    right: 16px;
+    bottom: 88px;
+    left: 16px;
+
+    z-index: 150;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    width: calc(100% - 32px);
+    max-width: 568px;
+
+    margin: 0 auto;
+    padding: 14px 16px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 17px;
+
+    background: #0f172a;
+    color: #fff;
+
+    box-shadow:
+        0 12px 35px
+        rgba(15, 23, 42, 0.3);
+
+    animation:
+        rest-timer-in
+        180ms ease;
+}
+
+
+/* ========================================
+   REST TIMER INFO
+======================================== */
+
+.rest-timer-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+
+    min-width: 0;
+
+    column-gap: 10px;
+
+    > span {
+        grid-column: 1 / -1;
+
+        margin-bottom: 3px;
+
+        color: #94a3b8;
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    > strong {
+        color: #fff;
+
+        font-size: 25px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.5px;
+    }
+
+    > small {
+        overflow: hidden;
+
+        max-width: 130px;
+
+        color: #cbd5e1;
+
+        font-size: 9px;
+        font-weight: 600;
+
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+/* ========================================
+   REST TIMER ACTIONS
+======================================== */
+
+.rest-timer-actions {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 8px;
+}
+
+.rest-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    height: 38px;
+    padding: 0 12px;
+
+    border: 0;
+    border-radius: 10px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 120ms ease,
+        background 120ms ease,
+        opacity 120ms ease;
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+
+/* +30 SEC */
+
+.rest-action-add {
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: #fff;
+
+    &:hover {
+        background:
+            rgba(255, 255, 255, 0.18);
+    }
+}
+
+.rest-action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+/* SKIP */
+
+.rest-action-skip {
+    padding: 0 13px;
+
+    background: #fff;
+    color: #0f172a;
+
+    &:hover {
+        background: #f1f5f9;
+    }
+}
+
+.rest-action-arrow {
+    font-size: 13px;
+    line-height: 1;
+}
+
+
+/* ========================================
+   REST COMPLETE
+======================================== */
+
+.rest-complete {
+    position: fixed;
+
+    right: 16px;
+    bottom: 88px;
+    left: 16px;
+
+    z-index: 160;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    width: calc(100% - 32px);
+    max-width: 568px;
+
+    margin: 0 auto;
+    padding: 14px 16px;
+
+    border-radius: 17px;
+
+    background: #0f5e6e;
+    color: #fff;
+
+    box-shadow:
+        0 12px 35px
+        rgba(15, 94, 110, 0.3);
+
+    animation:
+        rest-complete-in
+        200ms ease;
+}
+
+.rest-complete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    color: #fff;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.rest-complete > div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    strong {
+        color: #fff;
+
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+    }
+
+    span {
+        margin-top: 2px;
+
+        color: #fff;
+
+        opacity: 0.8;
+
+        font-size: 9px;
+    }
+}
+
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+@keyframes rest-timer-in {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes rest-complete-in {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 420px) {
+
+    .session-page {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .exercise-header {
+        gap: 8px;
+
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .set-header,
+    .set-row {
+        grid-template-columns:
+            34px
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            38px;
+
+        gap: 6px;
+
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .set-row input {
+        height: 38px;
+    }
+
+    .complete-set {
+        width: 36px;
+        height: 36px;
+    }
+
+    .rest-timer {
+        right: 12px;
+        left: 12px;
+
+        width: calc(100% - 24px);
+
+        padding: 12px;
+    }
+
+    .rest-timer-info {
+        column-gap: 7px;
+
+        > strong {
+            font-size: 22px;
+        }
+
+        > small {
+            max-width: 95px;
+        }
+    }
+
+    .rest-timer-actions {
+        gap: 6px;
+    }
+
+    .rest-action {
+        height: 36px;
+        padding: 0 10px;
+
+        font-size: 9px;
+    }
+
+    .rest-action-skip {
+        padding: 0 11px;
+    }
+
+    .rest-complete {
+        right: 12px;
+        left: 12px;
+
+        width: calc(100% - 24px);
+    }
+
+    .estimated-pr {
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 8px;
+    font-weight: 700;
+}
+
+/* ========================================
+   SET PERFORMANCE
+======================================== */
+
+.set-performance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin: -2px 14px 8px;
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    > span {
+        color: #64748b;
+
+        font-size: 8px;
+        font-weight: 700;
+    }
+
+    > strong {
+        color: #0f5e6e;
+
+        font-size: 7px;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+
+        white-space: nowrap;
+    }
+}
+}
+
+ /* ========================================
+   PROGRESSIVE OVERLOAD TARGET
+======================================== */
+
+.progressive-target {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 12px 0;
+    padding: 11px 12px;
+
+    border: 1px solid
+        rgba(15, 94, 110, 0.16);
+
+    border-radius: 12px;
+
+    background:
+        rgba(15, 94, 110, 0.055);
+}
+
+
+/* ICON */
+
+.target-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 34px;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    font-size: 17px;
+}
+
+
+/* CONTENT */
+
+.target-content {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    > span {
+        color: #0f5e6e;
+
+        font-size: 7px;
+        font-weight: 900;
+        letter-spacing: 0.7px;
+    }
+
+    > strong {
+        margin-top: 2px;
+
+        color: #0f172a;
+
+        font-size: 15px;
+        font-weight: 900;
+
+        line-height: 1.2;
+
+        font-variant-numeric:
+            tabular-nums;
+    }
+
+    > small {
+        margin-top: 3px;
+
+        color: #64748b;
+
+        font-size: 7px;
+        font-weight: 600;
+    }
+}
+
+/* ========================================
+   WEIGHT INCREASE UNLOCKED
+======================================== */
+
+.progressive-target.weight-unlocked {
+    border-color:
+        rgba(15, 94, 110, 0.28);
+
+    background:
+        rgba(15, 94, 110, 0.09);
+
+    .target-icon {
+        background:
+            rgba(255, 255, 255, 0.85);
+    }
+
+    .target-content {
+
+        > span {
+            color: #0f5e6e;
+        }
+
+        > strong {
+            color: #0f5e6e;
+        }
+    }
+}
