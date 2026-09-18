@@ -1,15 +1,31 @@
-* {
+/* ========================================
+   GLOBAL RESET
+======================================== */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 html,
 body {
+    width: 100%;
     margin: 0;
     padding: 0;
+
     min-height: 100%;
 }
 
+html {
+    background: #f8fafc;
+}
+
 body {
+    min-height: 100dvh;
+
+    overflow-x: hidden;
+
     background: #f8fafc;
     color: #0f172a;
 
@@ -21,20 +37,53 @@ body {
         sans-serif;
 
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+
+/* ========================================
+   FORM ELEMENTS
+======================================== */
+
 button,
-input {
+input,
+select,
+textarea {
     font: inherit;
 }
 
 
-:host {
+/* ========================================
+   APP
+======================================== */
+
+app-root {
     display: block;
+
+    width: 100%;
     min-height: 100dvh;
 }
 
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+
 .app-content {
-    min-height: 100dvh;
-    padding-bottom: 80px;
+    width: 100%;
+
+    /*
+     * Reserve space for the fixed
+     * bottom navigation.
+     */
+    min-height: calc(
+        100dvh -
+        72px -
+        env(safe-area-inset-bottom)
+    );
+
+    padding-bottom: calc(
+        72px +
+        env(safe-area-inset-bottom)
+    );
 }
