@@ -11,6 +11,8 @@
 html,
 body {
     width: 100%;
+    max-width: 100%;
+
     margin: 0;
     padding: 0;
 
@@ -18,6 +20,8 @@ body {
 }
 
 html {
+    overflow-x: hidden;
+
     background: #f8fafc;
 }
 
@@ -49,7 +53,21 @@ button,
 input,
 select,
 textarea {
+    max-width: 100%;
+
     font: inherit;
+}
+
+
+/* ========================================
+   MEDIA
+======================================== */
+
+img,
+svg,
+video,
+canvas {
+    max-width: 100%;
 }
 
 
@@ -61,7 +79,11 @@ app-root {
     display: block;
 
     width: 100%;
+    max-width: 100%;
+
     min-height: 100dvh;
+
+    overflow-x: hidden;
 }
 
 
@@ -71,11 +93,8 @@ app-root {
 
 .app-content {
     width: 100%;
+    max-width: 100%;
 
-    /*
-     * Reserve space for the fixed
-     * bottom navigation.
-     */
     min-height: calc(
         100dvh -
         72px -
@@ -86,4 +105,10 @@ app-root {
         72px +
         env(safe-area-inset-bottom)
     );
+
+    overflow-x: hidden;
+}
+
+* {
+    outline: 1px solid rgba(255, 0, 0, 0.15);
 }
