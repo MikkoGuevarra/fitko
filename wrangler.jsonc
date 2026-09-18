@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fitko",
+  "compatibility_date": "2026-09-18",
+  "assets": {
+    "directory": "./dist/fitko/browser",
+    "not_found_handling": "single-page-application"
+  }
+}
